@@ -10,6 +10,7 @@ export function appNav(t: Dict): AppNavLabels {
     plans: t.common.plans,
     settings: t.common.settings,
     admin: t.common.admin,
+    menu: t.common.menu,
   };
 }
 

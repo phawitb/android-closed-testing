@@ -7,7 +7,7 @@ import { ButtonLink, Container, cn } from "./ui";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SettingsModal } from "./SettingsModal";
 import { TokenBadge } from "./TokenBadge";
-import { Settings, ShieldCheck } from "./icons";
+import { Menu, Settings, ShieldCheck } from "./icons";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dict } from "@/lib/i18n/dictionaries";
 
@@ -17,6 +17,7 @@ export type AppNavLabels = {
   plans: string;
   settings: string;
   admin: string;
+  menu: string;
 };
 
 /** Top bar for every signed-in screen — the desktop replacement for back arrows. */
@@ -37,6 +38,7 @@ export function AppHeader({
 }) {
   const pathname = usePathname();
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
     { href: "/dashboard", label: nav.myApps, exact: true },
@@ -57,7 +59,7 @@ export function AppHeader({
             </span>
           </Link>
 
-          <nav className="-mx-1 flex flex-1 items-center gap-1 overflow-x-auto px-1">
+          <nav className="-mx-1 hidden flex-1 items-center gap-1 overflow-x-auto px-1 lg:flex">
             {links.map((link) => {
               const active = link.exact
                 ? pathname === link.href
@@ -81,45 +83,97 @@ export function AppHeader({
             })}
           </nav>
 
-          <div className="flex shrink-0 items-center gap-2">
-            <TokenBadge t={t} />
+          <div className="ml-auto flex shrink-0 items-center gap-2 lg:ml-0">
+            <div className="hidden items-center gap-2 lg:flex">
+              <TokenBadge t={t} />
+              <LocaleSwitcher locale={locale} />
 
-            <LocaleSwitcher locale={locale} className="hidden sm:inline-flex" />
+              {isAdmin && (
+                <Link
+                  href="/admin"
+                  className="rounded-full border border-line px-4 py-2 text-sm font-bold text-ink transition hover:bg-surface-dim"
+                >
+                  {nav.admin}
+                </Link>
+              )}
 
-            {isAdmin && (
-              <Link
-                href="/admin"
-                className="hidden rounded-full border border-line px-4 py-2 text-sm font-bold text-ink transition hover:bg-surface-dim lg:inline-flex"
+              <button
+                type="button"
+                onClick={() => setSettingsOpen(true)}
+                aria-label={nav.settings}
+                title={email ?? nav.settings}
+                className={cn(
+                  "rounded-full p-2.5 transition hover:bg-surface-dim",
+                  settingsOpen ? "text-brand" : "text-ink",
+                )}
               >
-                {nav.admin}
-              </Link>
-            )}
+                <Settings className="h-5 w-5" />
+              </button>
+            </div>
 
             {cta && (
-              <ButtonLink
-                href={cta.href}
-                variant="primary"
-                size="sm"
-                className="hidden sm:inline-flex"
-              >
+              <ButtonLink href={cta.href} variant="primary" size="sm">
                 {cta.label}
               </ButtonLink>
             )}
 
             <button
               type="button"
-              onClick={() => setSettingsOpen(true)}
-              aria-label={nav.settings}
-              title={email ?? nav.settings}
-              className={cn(
-                "rounded-full p-2.5 transition hover:bg-surface-dim",
-                settingsOpen ? "text-brand" : "text-ink",
-              )}
+              aria-label={nav.menu}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((value) => !value)}
+              className="rounded-full p-2 text-ink transition hover:bg-surface-dim lg:hidden"
             >
-              <Settings className="h-5 w-5" />
+              <Menu className="h-6 w-6" />
             </button>
           </div>
         </Container>
+
+        <div
+          className={cn(
+            "overflow-hidden border-t border-line transition-[max-height] duration-200 lg:hidden",
+            menuOpen ? "max-h-96" : "max-h-0 border-t-0",
+          )}
+        >
+          <Container width="xl" className="flex flex-col gap-1 py-2">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setMenuOpen(false)}
+                className="rounded-lg px-3 py-3 text-[15px] font-bold text-ink-soft transition hover:bg-surface-dim"
+              >
+                {link.label}
+              </Link>
+            ))}
+
+            {isAdmin && (
+              <Link
+                href="/admin"
+                onClick={() => setMenuOpen(false)}
+                className="rounded-lg px-3 py-3 text-[15px] font-bold text-ink-soft transition hover:bg-surface-dim"
+              >
+                {nav.admin}
+              </Link>
+            )}
+
+            <button
+              type="button"
+              onClick={() => {
+                setMenuOpen(false);
+                setSettingsOpen(true);
+              }}
+              className="rounded-lg px-3 py-3 text-left text-[15px] font-bold text-ink-soft transition hover:bg-surface-dim"
+            >
+              {nav.settings}
+            </button>
+
+            <div className="flex items-center gap-3 px-3 py-2">
+              <TokenBadge t={t} />
+              <LocaleSwitcher locale={locale} />
+            </div>
+          </Container>
+        </div>
       </header>
 
       <SettingsModal
