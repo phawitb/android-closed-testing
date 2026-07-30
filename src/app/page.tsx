@@ -2,6 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { SiteHeader } from "@/components/SiteHeader";
 import { ProgressRing } from "@/components/ProgressRing";
+import { AppLogo } from "@/components/AppLogo";
 import {
   ButtonLink,
   Card,
@@ -397,9 +398,7 @@ export default async function HomePage() {
           className="flex flex-col items-center justify-between gap-4 text-sm text-muted sm:flex-row"
         >
           <span className="inline-flex items-center gap-2">
-            <span className="grid h-7 w-7 place-items-center rounded-lg bg-brand text-white">
-              <ShieldCheck className="h-4 w-4" />
-            </span>
+            <AppLogo className="h-7 w-7" />
             <span className="font-display font-extrabold text-ink">
               Closed Testing
             </span>

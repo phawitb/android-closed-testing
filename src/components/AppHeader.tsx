@@ -7,7 +7,8 @@ import { ButtonLink, Container, cn } from "./ui";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SettingsModal } from "./SettingsModal";
 import { TokenBadge } from "./TokenBadge";
-import { Menu, Settings, ShieldCheck } from "./icons";
+import { AppLogo } from "./AppLogo";
+import { Menu, Settings } from "./icons";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dict } from "@/lib/i18n/dictionaries";
 
@@ -51,9 +52,7 @@ export function AppHeader({
       <header className="sticky top-0 z-40 border-b border-line/70 bg-background/85 backdrop-blur-md">
         <Container width="xl" className="flex h-16 items-center gap-4 lg:h-18">
           <Link href="/dashboard" className="inline-flex items-center gap-2.5">
-            <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand text-white">
-              <ShieldCheck className="h-5 w-5" />
-            </span>
+            <AppLogo className="h-9 w-9" />
             <span className="font-display hidden text-lg font-extrabold text-ink sm:inline">
               Closed Testing
             </span>

@@ -4,7 +4,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { ButtonLink, Container, cn } from "./ui";
 import { LocaleSwitcher } from "./LocaleSwitcher";
-import { Menu, ShieldCheck } from "./icons";
+import { AppLogo } from "./AppLogo";
+import { Menu } from "./icons";
 import type { Locale } from "@/lib/i18n/config";
 
 export type SiteNavLabels = {
@@ -43,9 +44,7 @@ export function SiteHeader({
     <header className="sticky top-0 z-40 border-b border-line/70 bg-background/80 backdrop-blur-md">
       <Container width="full" className="flex h-16 items-center gap-6 lg:h-20">
         <Link href="/" className="inline-flex items-center gap-2.5">
-          <span className="grid h-9 w-9 place-items-center rounded-xl bg-brand text-white">
-            <ShieldCheck className="h-5 w-5" />
-          </span>
+          <AppLogo className="h-9 w-9" />
           <span className="font-display text-lg font-extrabold text-ink">
             Closed Testing
           </span>
