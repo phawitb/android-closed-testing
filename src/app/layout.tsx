@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Kanit, Plus_Jakarta_Sans, Quicksand } from "next/font/google";
 import { getLocale } from "@/lib/i18n/server";
+import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import "./globals.css";
 
 const display = Plus_Jakarta_Sans({
@@ -27,6 +28,11 @@ export const metadata: Metadata = {
   title: "Closed Testing",
   description:
     "Submit your Android app for a 14-day Google Play closed testing cycle and track every day of progress.",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "default",
+    title: "Closed Testing",
+  },
 };
 
 export const viewport: Viewport = {
@@ -46,6 +52,7 @@ export default async function RootLayout({
         className={`${display.variable} ${body.variable} ${thai.variable} antialiased`}
       >
         {children}
+        <ServiceWorkerRegister />
       </body>
     </html>
   );
