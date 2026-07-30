@@ -189,7 +189,7 @@ type ButtonLook = {
 
 function buttonClass({ variant = "primary", size = "md", full }: ButtonLook) {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-2xl font-bold transition active:scale-[0.99]",
+    "inline-flex items-center justify-center gap-2 rounded-2xl font-bold whitespace-nowrap transition active:scale-[0.99]",
     "disabled:pointer-events-none disabled:bg-none disabled:bg-surface-dim disabled:text-muted disabled:shadow-none",
     VARIANTS[variant],
     SIZES[size],

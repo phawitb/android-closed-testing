@@ -33,7 +33,7 @@ export default async function LoginPage({
     <Page className="hero-canvas flex flex-col" glow={false}>
       <Container
         width="xl"
-        className="flex flex-1 items-center justify-center py-10 lg:py-16"
+        className="flex flex-1 items-start justify-center pt-16 pb-16 sm:pt-24 lg:pt-28"
       >
         <Card className="ct-pop-2 mx-auto w-full max-w-md rounded-2xl p-7 shadow-xl shadow-black/[0.06] sm:p-9">
           <h2 className="text-2xl font-extrabold text-ink">

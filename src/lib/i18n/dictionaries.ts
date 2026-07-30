@@ -664,8 +664,8 @@ const th: Dictionary = {
   },
 
   login: {
-    cardTitle: "ดำเนินการต่อด้วย Google",
-    button: "ดำเนินการต่อด้วย Google",
+    cardTitle: "Log in ด้วย Google",
+    button: "Log in ด้วย Google",
     signingIn: "กำลังพาไปหน้า Google…",
     errorExpired:
       "ลิงก์เข้าสู่ระบบหมดอายุหรือถูกใช้ไปแล้ว กรุณาลองใหม่อีกครั้ง",
