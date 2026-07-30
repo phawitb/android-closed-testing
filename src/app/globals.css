@@ -1,0 +1,183 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #131320;
+
+  --ink: #131320;
+  --ink-soft: #3f3f4d;
+  --muted: #8a8a99;
+  --line: #ececf1;
+  --surface: #ffffff;
+  --surface-dim: #f6f6f8;
+  --surface-sunken: #fafafc;
+
+  --brand: #2563eb;
+  --brand-strong: #1d4ed8;
+  --brand-tint: #dbeafe;
+  --brand-faint: #eff6ff;
+
+  --grad-from: #1e3a8a;
+  --grad-to: #2563eb;
+
+  --ok: #16a34a;
+  --warn: #f59e0b;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-surface: var(--surface);
+  --color-surface-dim: var(--surface-dim);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-brand: var(--brand);
+  --color-brand-strong: var(--brand-strong);
+  --color-brand-tint: var(--brand-tint);
+  --color-brand-faint: var(--brand-faint);
+  --color-ok: var(--ok);
+  --color-warn: var(--warn);
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+}
+
+* {
+  min-width: 0;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family:
+    var(--font-body), var(--font-thai), ui-rounded, "Segoe UI", system-ui,
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family:
+    var(--font-display), var(--font-body), var(--font-thai), system-ui,
+    sans-serif;
+  letter-spacing: -0.02em;
+}
+
+button:not(:disabled),
+a {
+  cursor: pointer;
+}
+
+button,
+a,
+label[for] {
+  -webkit-tap-highlight-color: transparent;
+}
+
+:where(button, a, input, textarea, select):focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* Soft blue halo used behind the phone-style screens in the reference app */
+.brand-glow {
+  position: relative;
+  isolation: isolate;
+}
+
+.brand-glow::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    radial-gradient(60% 45% at 50% 42%, rgba(37, 99, 235, 0.09), transparent 70%),
+    radial-gradient(50% 30% at 50% 100%, rgba(29, 78, 216, 0.1), transparent 70%);
+  pointer-events: none;
+}
+
+/* Wide marketing backdrop: a tinted aurora over a faint grid. */
+.hero-canvas {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+.hero-canvas::before {
+  content: "";
+  position: absolute;
+  inset: -20% -10% auto -10%;
+  height: 900px;
+  z-index: -2;
+  background:
+    radial-gradient(38% 42% at 18% 22%, rgba(30, 58, 138, 0.14), transparent 68%),
+    radial-gradient(42% 46% at 82% 12%, rgba(37, 99, 235, 0.16), transparent 66%),
+    radial-gradient(46% 40% at 50% 78%, rgba(29, 78, 216, 0.08), transparent 70%);
+  pointer-events: none;
+}
+
+.hero-canvas::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto 0;
+  height: 720px;
+  z-index: -1;
+  background-image:
+    linear-gradient(to right, rgba(19, 19, 32, 0.045) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(19, 19, 32, 0.045) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(80% 60% at 50% 0%, #000 20%, transparent 78%);
+  pointer-events: none;
+}
+
+/* Cards that lift on hover — used across the marketing and dashboard grids. */
+.lift {
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    border-color 0.18s ease;
+}
+
+.lift:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 40px -24px rgba(19, 19, 32, 0.35);
+}
+
+@keyframes ct-pop {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.ct-pop {
+  animation: ct-pop 0.32s ease-out both;
+}
+
+.ct-pop-2 {
+  animation: ct-pop 0.44s 0.06s ease-out both;
+}
+
+.ct-pop-3 {
+  animation: ct-pop 0.5s 0.12s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ct-pop,
+  .ct-pop-2,
+  .ct-pop-3 {
+    animation: none;
+  }
+
+  .lift:hover {
+    transform: none;
+  }
+}
