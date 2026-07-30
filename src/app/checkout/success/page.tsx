@@ -9,6 +9,7 @@ import { isStripeConfigured } from "@/lib/stripe";
 import { getT } from "@/lib/i18n/server";
 import { appNav } from "@/lib/i18n/nav";
 import { fill } from "@/components/RichText";
+import { PendingRetry } from "./PendingRetry";
 
 export const metadata = { title: "Payment complete — Closed Testing" };
 export const dynamic = "force-dynamic";
@@ -130,6 +131,7 @@ export default async function CheckoutSuccessPage({
           </>
         ) : (
           <Card className="text-center">
+            {result.status === "pending" && <PendingRetry />}
             <h1 className="text-2xl font-extrabold text-ink">
               {result.status === "pending"
                 ? t.checkout.successTitle
@@ -141,9 +143,20 @@ export default async function CheckoutSuccessPage({
                 : t.checkout.failedBody}
             </p>
             <div className="mt-6 flex justify-center">
-              <ButtonLink href="/pricing" variant="outline" size="md">
-                {t.checkout.backToPricing}
-              </ButtonLink>
+              {result.status === "pending" ? (
+                <ButtonLink
+                  href={`/checkout/success?session_id=${encodeURIComponent(sessionId)}`}
+                  variant="primary"
+                  size="md"
+                >
+                  {t.checkout.retry}
+                  <ArrowRight className="h-4 w-4" />
+                </ButtonLink>
+              ) : (
+                <ButtonLink href="/pricing" variant="outline" size="md">
+                  {t.checkout.backToPricing}
+                </ButtonLink>
+              )}
             </div>
           </Card>
         )}

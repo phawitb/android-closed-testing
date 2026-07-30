@@ -438,6 +438,7 @@ const en = {
     useNow: "Use a token now",
     backToApps: "Back to my apps",
     pending: "We are still confirming your payment. Refresh in a moment.",
+    retry: "Continue",
     failedTitle: "Payment not completed",
     failedBody:
       "Your card was not charged, or the checkout was cancelled. You can try again from the pricing page.",
@@ -943,6 +944,7 @@ const th: Dictionary = {
     useNow: "ใช้ Token ตอนนี้",
     backToApps: "กลับไปที่แอปของฉัน",
     pending: "เรากำลังยืนยันการชำระเงิน กรุณารีเฟรชอีกครั้งในอีกสักครู่",
+    retry: "ดำเนินการต่อ",
     failedTitle: "ยังชำระเงินไม่สำเร็จ",
     failedBody:
       "บัตรของคุณยังไม่ถูกตัด หรือคุณยกเลิกการชำระเงินไป ลองใหม่ได้จากหน้าแพ็กเกจ",
