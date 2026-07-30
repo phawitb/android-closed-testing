@@ -108,13 +108,19 @@ function daysBetween(from: string, to: string): number {
   return Math.round(ms / 86_400_000);
 }
 
+/**
+ * Formats either a plain "YYYY-MM-DD" date (e.g. `started_on`) or a full
+ * ISO timestamp (e.g. `created_at`) — `toUTCDate` only understands the
+ * former, so timestamps go straight through the `Date` constructor instead.
+ */
 export function formatDay(isoDate: string): string {
+  const date = isoDate.includes("T") ? new Date(isoDate) : toUTCDate(isoDate);
   return new Intl.DateTimeFormat("en-US", {
     timeZone: "UTC",
     month: "short",
     day: "2-digit",
     year: "numeric",
-  }).format(toUTCDate(isoDate));
+  }).format(date);
 }
 
 export type DayState = "completed" | "current" | "locked";
