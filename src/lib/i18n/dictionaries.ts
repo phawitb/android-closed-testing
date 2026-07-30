@@ -492,6 +492,12 @@ const en = {
     copied: "Copied",
   },
 
+  pwa: {
+    iosTitle: "Install this app",
+    iosBody: 'Tap the Share button, then "Add to Home Screen."',
+    close: "Close",
+  },
+
   plan: {
     features: [
       "Production Access Guarantee",
@@ -987,6 +993,12 @@ const th: Dictionary = {
   copy: {
     clickToCopy: "คลิกเพื่อคัดลอก",
     copied: "คัดลอกแล้ว",
+  },
+
+  pwa: {
+    iosTitle: "ติดตั้งแอปนี้",
+    iosBody: 'แตะปุ่มแชร์ แล้วเลือก "เพิ่มไปยังหน้าจอโฮม"',
+    close: "ปิด",
   },
 
   plan: {

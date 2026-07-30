@@ -1,7 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Kanit, Plus_Jakarta_Sans, Quicksand } from "next/font/google";
-import { getLocale } from "@/lib/i18n/server";
+import { getT } from "@/lib/i18n/server";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
+import { InstallPrompt } from "@/components/InstallPrompt";
 import "./globals.css";
 
 const display = Plus_Jakarta_Sans({
@@ -44,7 +45,7 @@ export const viewport: Viewport = {
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
-  const locale = await getLocale();
+  const { locale, t } = await getT();
 
   return (
     <html lang={locale}>
@@ -53,6 +54,11 @@ export default async function RootLayout({
       >
         {children}
         <ServiceWorkerRegister />
+        <InstallPrompt
+          iosTitle={t.pwa.iosTitle}
+          iosBody={t.pwa.iosBody}
+          close={t.pwa.close}
+        />
       </body>
     </html>
   );
