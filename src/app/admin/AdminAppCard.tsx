@@ -3,18 +3,17 @@
 import { useActionState, useState } from "react";
 import { Card, ErrorText, StatusPill, cn } from "@/components/ui";
 import { ChevronDown } from "@/components/icons";
-import { STATUS_LABEL, currentDay, formatDay } from "@/lib/testing";
-import type { AppMessage } from "@/lib/testing";
+import {
+  STATUS_LABEL,
+  buildTimeline,
+  currentDay,
+  formatDay,
+  today,
+} from "@/lib/testing";
+import type { AppDayLog, AppMessage } from "@/lib/testing";
 import { updateApp, sendMessage, type AdminState } from "./actions";
+import { DayLogRow } from "./DayLogRow";
 import type { AdminApp } from "./types";
-
-const STATUSES = [
-  "draft",
-  "awaiting_setup",
-  "in_progress",
-  "completed",
-  "cancelled",
-] as const;
 
 const inputClass =
   "w-full rounded-xl border border-line bg-white px-3 py-2 text-sm text-ink outline-none focus:border-brand";
@@ -22,10 +21,12 @@ const inputClass =
 export function AdminAppCard({
   app,
   messages,
+  dayLogs,
   needsAction,
 }: {
   app: AdminApp;
   messages: AppMessage[];
+  dayLogs: AppDayLog[];
   needsAction: boolean;
 }) {
   const [state, formAction, pending] = useActionState<AdminState, FormData>(
@@ -37,9 +38,12 @@ export function AdminAppCard({
     FormData
   >(sendMessage, {});
   const [expanded, setExpanded] = useState(false);
+  const [detailTab, setDetailTab] = useState<"days" | "messages">("days");
 
   const day = currentDay(app);
   const lastMessage = messages.at(-1);
+  const timeline = buildTimeline(app);
+  const dayLogByDay = new Map(dayLogs.map((log) => [log.day, log]));
 
   return (
     <Card
@@ -148,167 +152,152 @@ export function AdminAppCard({
           )}
 
           {/* ------------------------------------------------ cycle controls */}
-          <form
-            action={formAction}
-            className="mt-5 space-y-4 border-t border-line pt-5"
-          >
+          <form action={formAction} className="mt-5 border-t border-line pt-5">
             <p className="text-xs font-extrabold tracking-wider text-muted uppercase">
               Cycle controls
             </p>
             <input type="hidden" name="app_id" value={app.id} />
+            <input type="hidden" name="start_now" value="1" />
 
-            <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-3 flex flex-wrap items-end gap-3">
               <label className="block">
                 <span className="mb-1 block text-xs font-bold text-muted">
-                  Status
-                </span>
-                <select
-                  name="status"
-                  defaultValue={app.status}
-                  className={inputClass}
-                >
-                  {STATUSES.map((value) => (
-                    <option key={value} value={value}>
-                      {STATUS_LABEL[value]}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="block">
-                <span className="mb-1 block text-xs font-bold text-muted">
-                  Day 1 date
+                  Start date
                 </span>
                 <input
                   type="date"
                   name="started_on"
-                  defaultValue={app.started_on ?? ""}
+                  defaultValue={app.started_on ?? today()}
                   className={inputClass}
                 />
               </label>
 
-              <label className="block">
-                <span className="mb-1 block text-xs font-bold text-muted">
-                  Total days
-                </span>
-                <input
-                  type="number"
-                  name="total_days"
-                  min={1}
-                  max={60}
-                  defaultValue={app.total_days}
-                  className={inputClass}
-                />
-              </label>
-
-              <label className="block">
-                <span className="mb-1 block text-xs font-bold text-muted">
-                  Pin current day
-                </span>
-                <input
-                  type="number"
-                  name="day_override"
-                  min={0}
-                  max={60}
-                  defaultValue={app.day_override ?? ""}
-                  placeholder="auto"
-                  className={inputClass}
-                />
-              </label>
-            </div>
-
-            <div className="flex flex-wrap gap-4 text-xs font-semibold text-muted">
-              <Checkbox name="clear_started_on" label="Clear start date" />
-              <Checkbox name="clear_day_override" label="Unpin day" />
-            </div>
-
-            <label className="block">
-              <span className="mb-1 block text-xs font-bold text-muted">
-                Internal note
-              </span>
-              <input
-                name="admin_note"
-                defaultValue={app.admin_note ?? ""}
-                className={inputClass}
-              />
-            </label>
-
-            <ErrorText>{state.error}</ErrorText>
-            {state.notice && (
-              <p className="text-sm font-semibold text-emerald-600">
-                {state.notice}
-              </p>
-            )}
-
-            <div className="flex flex-wrap gap-3">
               <button
                 type="submit"
                 disabled={pending}
-                className="rounded-full bg-ink px-5 py-2.5 text-sm font-bold text-white transition hover:brightness-125 disabled:opacity-60"
+                className="rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white transition hover:brightness-110 disabled:opacity-60"
               >
-                {pending ? "Saving…" : "Save changes"}
-              </button>
-              <button
-                type="submit"
-                name="start_now"
-                value="1"
-                disabled={pending || app.status === "in_progress"}
-                className="rounded-full bg-brand px-5 py-2.5 text-sm font-bold text-white transition hover:brightness-110 disabled:opacity-40"
-              >
-                Start cycle today
+                {pending ? "Starting…" : "Start program"}
               </button>
             </div>
+
+            <ErrorText>{state.error}</ErrorText>
+            {state.notice && (
+              <p className="mt-2 text-sm font-semibold text-emerald-600">
+                {state.notice}
+              </p>
+            )}
           </form>
 
-          {/* --------------------------------------------------- messages */}
+          {/* ---------------------------------------------------- subtabs */}
           <div className="mt-5 border-t border-line pt-5">
-            <p className="text-xs font-extrabold tracking-wider text-muted uppercase">
-              Messages
-            </p>
+            <div className="flex gap-1 rounded-full bg-surface-dim p-1 text-sm font-bold">
+              <TabButton
+                active={detailTab === "days"}
+                onClick={() => setDetailTab("days")}
+              >
+                Day list ({app.total_days})
+              </TabButton>
+              <TabButton
+                active={detailTab === "messages"}
+                onClick={() => setDetailTab("messages")}
+              >
+                Messages{messages.length > 0 ? ` (${messages.length})` : ""}
+              </TabButton>
+            </div>
 
-            {messages.length > 0 && (
-              <ol className="mt-3 max-h-64 space-y-2 overflow-y-auto">
-                {messages.map((message) => (
-                  <li
-                    key={message.id}
-                    className={cn(
-                      "rounded-lg px-3 py-2 text-sm leading-relaxed",
-                      message.sender === "owner"
-                        ? "bg-red-50 text-ink"
-                        : "bg-surface-dim text-ink",
-                    )}
-                  >
-                    <p className="text-xs font-extrabold tracking-wider text-muted uppercase">
-                      {message.sender === "owner" ? "Customer" : "Admin"} ·{" "}
-                      {formatDay(message.created_at)}
-                    </p>
-                    <p className="mt-1 whitespace-pre-wrap">{message.body}</p>
-                  </li>
+            {detailTab === "days" && (
+              <ol className="mt-4 max-h-96 space-y-1 overflow-y-auto">
+                {timeline.map((entry) => (
+                  <DayLogRow
+                    key={entry.day}
+                    appId={app.id}
+                    entry={entry}
+                    scheduled={Boolean(app.started_on)}
+                    log={dayLogByDay.get(entry.day)}
+                  />
                 ))}
               </ol>
             )}
 
-            <form action={messageAction} className="mt-3 flex flex-col gap-2">
-              <input type="hidden" name="app_id" value={app.id} />
-              <textarea
-                name="body"
-                rows={2}
-                placeholder="Reply to the customer…"
-                className={cn(inputClass, "resize-y")}
-              />
-              <ErrorText>{messageState.error}</ErrorText>
-              <button
-                type="submit"
-                disabled={messagePending}
-                className="self-start rounded-full border border-line px-4 py-2 text-sm font-bold text-ink transition hover:bg-surface-dim disabled:opacity-60"
-              >
-                {messagePending ? "Sending…" : "Reply"}
-              </button>
-            </form>
+            {detailTab === "messages" && (
+              <div className="mt-4">
+                {messages.length > 0 && (
+                  <ol className="max-h-64 space-y-2 overflow-y-auto">
+                    {messages.map((message) => (
+                      <li
+                        key={message.id}
+                        className={cn(
+                          "rounded-lg px-3 py-2 text-sm leading-relaxed",
+                          message.sender === "owner"
+                            ? "bg-red-50 text-ink"
+                            : "bg-surface-dim text-ink",
+                        )}
+                      >
+                        <p className="text-xs font-extrabold tracking-wider text-muted uppercase">
+                          {message.sender === "owner" ? "Customer" : "Admin"} ·{" "}
+                          {formatDay(message.created_at)}
+                        </p>
+                        <p className="mt-1 whitespace-pre-wrap">
+                          {message.body}
+                        </p>
+                      </li>
+                    ))}
+                  </ol>
+                )}
+
+                <form
+                  action={messageAction}
+                  className={cn(
+                    "flex flex-col gap-2",
+                    messages.length > 0 && "mt-3",
+                  )}
+                >
+                  <input type="hidden" name="app_id" value={app.id} />
+                  <textarea
+                    name="body"
+                    rows={2}
+                    placeholder="Reply to the customer…"
+                    className={cn(inputClass, "resize-y")}
+                  />
+                  <ErrorText>{messageState.error}</ErrorText>
+                  <button
+                    type="submit"
+                    disabled={messagePending}
+                    className="self-start rounded-full border border-line px-4 py-2 text-sm font-bold text-ink transition hover:bg-surface-dim disabled:opacity-60"
+                  >
+                    {messagePending ? "Sending…" : "Reply"}
+                  </button>
+                </form>
+              </div>
+            )}
           </div>
         </>
       )}
     </Card>
+  );
+}
+
+function TabButton({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean;
+  onClick: () => void;
+  children: React.ReactNode;
+}) {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={cn(
+        "flex-1 rounded-full px-4 py-1.5 transition",
+        active ? "bg-white text-ink shadow-sm" : "text-muted hover:text-ink",
+      )}
+    >
+      {children}
+    </button>
   );
 }
 
@@ -322,19 +311,5 @@ function Flag({ on, label }: { on: boolean; label: string }) {
     >
       {label}
     </span>
-  );
-}
-
-function Checkbox({ name, label }: { name: string; label: string }) {
-  return (
-    <label className="inline-flex items-center gap-2">
-      <input
-        type="checkbox"
-        name={name}
-        value="1"
-        className="accent-[var(--brand)]"
-      />
-      {label}
-    </label>
   );
 }

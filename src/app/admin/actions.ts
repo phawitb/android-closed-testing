@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
-import { today } from "@/lib/testing";
+import { today, type DayState } from "@/lib/testing";
 import { sendTestingCompleteEmail } from "@/lib/email";
 
 export type AdminState = { error?: string; notice?: string; codes?: string[] };
@@ -64,7 +64,9 @@ export async function updateApp(
   const { error } = await supabase.rpc("ct_admin_update_app", {
     p_app_id: appId,
     p_status: status,
-    p_started_on: startNow ? today() : text(formData.get("started_on")),
+    p_started_on: startNow
+      ? (text(formData.get("started_on")) ?? today())
+      : text(formData.get("started_on")),
     p_clear_started_on: formData.get("clear_started_on") === "1",
     p_day_override: int(formData.get("day_override")),
     p_clear_day_override: formData.get("clear_day_override") === "1",
@@ -83,8 +85,7 @@ export async function updateApp(
       { p_app_id: appId },
     );
     const claim = claimRows?.[0] as
-      | { claimed: boolean; name: string; contact_email: string }
-      | undefined;
+      { claimed: boolean; name: string; contact_email: string } | undefined;
     if (claim?.claimed && claim.contact_email) {
       await sendTestingCompleteEmail(claim.contact_email, {
         appName: claim.name,
@@ -120,6 +121,49 @@ export async function sendMessage(
   refresh();
   revalidatePath(`/dashboard/apps/${appId}`);
   return { notice: "Sent." };
+}
+
+export type DayLogResult = { ok: true } | { ok: false; error: string };
+
+/**
+ * Sets one day's state (locked / current / completed) and its
+ * customer-visible update. Marking the final day completed auto-completes
+ * the app and fires the completion email exactly once — the DB guard makes
+ * re-saving it safe.
+ */
+export async function setDayLog(
+  appId: string,
+  day: number,
+  state: DayState,
+  message: string,
+): Promise<DayLogResult> {
+  const supabase = await adminClient();
+
+  const { data, error } = await supabase.rpc("ct_admin_set_day_log", {
+    p_app_id: appId,
+    p_day: day,
+    p_state: state,
+    p_message: message,
+  });
+
+  if (error) {
+    console.error("ct_admin_set_day_log failed", error);
+    return { ok: false, error: friendly(error.message) };
+  }
+
+  const result = (
+    data as
+      { newly_completed: boolean; name: string; contact_email: string }[] | null
+  )?.[0];
+  if (result?.newly_completed && result.contact_email) {
+    await sendTestingCompleteEmail(result.contact_email, {
+      appName: result.name,
+    });
+  }
+
+  refresh();
+  revalidatePath(`/dashboard/apps/${appId}`);
+  return { ok: true };
 }
 
 // ---------------------------------------------------------------------------
@@ -253,7 +297,8 @@ export async function saveSettings(
   ).trim();
   if (stripePublishableKey && !/^pk_(test|live)_/.test(stripePublishableKey)) {
     return {
-      error: "That doesn't look like a Stripe publishable key (pk_test_… or pk_live_…).",
+      error:
+        "That doesn't look like a Stripe publishable key (pk_test_… or pk_live_…).",
     };
   }
 
@@ -302,6 +347,48 @@ export async function saveSettings(
   // The default language lives in the root layout, which every route shares.
   revalidatePath("/", "layout");
   return { notice: "Settings saved." };
+}
+
+/**
+ * Reset to a fresh app: wipes every submission, message thread, token, and
+ * order — but leaves packages, admin accounts, and site settings alone.
+ * The confirmation phrase is re-checked here, never trusted from the client.
+ */
+export async function clearAllData(
+  _state: AdminState,
+  formData: FormData,
+): Promise<AdminState> {
+  const supabase = await adminClient();
+
+  if (String(formData.get("confirm") ?? "") !== "DELETE ALL DATA") {
+    return { error: "Type the confirmation phrase exactly to proceed." };
+  }
+
+  const { data, error } = await supabase.rpc("ct_admin_clear_all_data");
+
+  if (error) {
+    console.error("ct_admin_clear_all_data failed", error);
+    return { error: friendly(error.message) };
+  }
+
+  const result = (
+    data as
+      | {
+          apps_deleted: number;
+          tokens_deleted: number;
+          orders_deleted: number;
+        }[]
+      | null
+  )?.[0];
+
+  refresh();
+  revalidatePath("/dashboard", "layout");
+
+  return {
+    notice: result
+      ? `Cleared ${result.apps_deleted} app${result.apps_deleted === 1 ? "" : "s"}, ${result.tokens_deleted} token${result.tokens_deleted === 1 ? "" : "s"}, ${result.orders_deleted} order${result.orders_deleted === 1 ? "" : "s"}.`
+      : "All data cleared.",
+  };
 }
 
 // ---------------------------------------------------------------------------

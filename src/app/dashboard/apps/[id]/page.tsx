@@ -12,7 +12,7 @@ import {
   cn,
 } from "@/components/ui";
 import { ProgressRing } from "@/components/ProgressRing";
-import { RichText, fill } from "@/components/RichText";
+import { RichText } from "@/components/RichText";
 import {
   ArrowLeft,
   Bolt,
@@ -30,8 +30,10 @@ import {
   TESTER_GROUP_URL,
   buildTimeline,
   currentDay,
+  dayCopy,
   formatDay,
   progressPercent,
+  type AppDayLog,
   type AppMessage,
   type TestingApp,
   type TimelineDay,
@@ -60,21 +62,28 @@ export default async function AppDetailsPage({
 
   if (!user) redirect(`/login?next=/dashboard/apps/${id}`);
 
-  const [{ data }, { data: isAdmin }, { data: messageRows }] =
-    await Promise.all([
-      supabase.from("ct_apps").select("*").eq("id", id).maybeSingle(),
-      supabase.rpc("ct_is_admin"),
-      supabase
-        .from("ct_app_messages")
-        .select("*")
-        .eq("app_id", id)
-        .order("created_at"),
-    ]);
+  const [
+    { data },
+    { data: isAdmin },
+    { data: messageRows },
+    { data: dayLogRows },
+  ] = await Promise.all([
+    supabase.from("ct_apps").select("*").eq("id", id).maybeSingle(),
+    supabase.rpc("ct_is_admin"),
+    supabase
+      .from("ct_app_messages")
+      .select("*")
+      .eq("app_id", id)
+      .order("created_at"),
+    supabase.from("ct_app_day_logs").select("*").eq("app_id", id),
+  ]);
 
   if (!data) notFound();
 
   const app = data as TestingApp;
   const messages = (messageRows ?? []) as AppMessage[];
+  const dayLogs = (dayLogRows ?? []) as AppDayLog[];
+  const dayLogByDay = new Map(dayLogs.map((log) => [log.day, log]));
   const day = currentDay(app);
   const timeline = buildTimeline(app);
   const running = app.status === "in_progress" || app.status === "completed";
@@ -225,6 +234,7 @@ export default async function AppDetailsPage({
                       entry={entry}
                       last={index === timeline.length - 1}
                       scheduled={Boolean(app.started_on)}
+                      log={dayLogByDay.get(entry.day)}
                       t={t}
                       promo={
                         app.app_type === "paid" && app.status !== "cancelled"
@@ -379,47 +389,27 @@ function Row({
   );
 }
 
-function dayCopy(entry: TimelineDay, scheduled: boolean, t: Dict) {
-  const copy = t.appDetails.timeline;
-
-  if (entry.isFormAnswersDay && entry.state !== "completed") {
-    return copy.formAnswersDay;
-  }
-  if (entry.isFinalDay && entry.state !== "completed") {
-    return copy.finalDay;
-  }
-
-  const date = entry.date ? formatDay(entry.date) : null;
-
-  if (entry.state === "completed") {
-    return date ? fill(copy.completedOn, { date }) : copy.completed;
-  }
-  if (entry.state === "current") {
-    return date ? fill(copy.inProgressOn, { date }) : copy.inProgress;
-  }
-  return scheduled && date
-    ? fill(copy.scheduledOn, { date })
-    : copy.notScheduled;
-}
-
 function DayRow({
   entry,
   last,
   scheduled,
+  log,
   t,
   promo,
 }: {
   entry: TimelineDay;
   last: boolean;
   scheduled: boolean;
+  /** Admin's per-day log — its state overrides the date-computed one. */
+  log?: AppDayLog;
   t: Dict;
   /** Paid, unstarted apps get a "send promo codes" prompt on day 1. */
   promo?: { appId: string; submitted: boolean };
 }) {
-  const done = entry.state === "completed";
-  const current = entry.state === "current";
-  const showPromoCta =
-    Boolean(promo) && entry.day === 1 && entry.state === "locked";
+  const state = log?.state ?? entry.state;
+  const done = state === "completed";
+  const current = state === "current";
+  const showPromoCta = Boolean(promo) && entry.day === 1 && state === "locked";
 
   return (
     <li className={cn("relative flex gap-4", last ? "pb-0" : "pb-5")}>
@@ -438,7 +428,7 @@ function DayRow({
           "relative z-10 grid h-8 w-8 shrink-0 place-items-center rounded-full border-2",
           done && "border-brand/40 bg-white text-brand",
           current && "border-brand bg-brand text-white",
-          entry.state === "locked" && "border-line bg-white text-muted",
+          state === "locked" && "border-line bg-white text-muted",
         )}
       >
         {done ? (
@@ -455,7 +445,7 @@ function DayRow({
           <h4
             className={cn(
               "text-lg font-extrabold",
-              entry.state === "locked" ? "text-muted" : "text-ink",
+              state === "locked" ? "text-muted" : "text-ink",
             )}
           >
             {t.common.day} {entry.day}
@@ -471,7 +461,7 @@ function DayRow({
         <p
           className={cn(
             "mt-0.5 text-[15px] leading-snug",
-            entry.state === "locked" ? "text-muted/80" : "text-muted",
+            state === "locked" ? "text-muted/80" : "text-muted",
           )}
         >
           {showPromoCta && promo ? (
@@ -481,9 +471,17 @@ function DayRow({
               <PromoCodesButton appId={promo.appId} t={t} />
             )
           ) : (
-            dayCopy(entry, scheduled, t)
+            dayCopy(entry, state, scheduled, t)
           )}
         </p>
+        {log?.message && !(showPromoCta && !promo?.submitted) && (
+          <p className="mt-2 rounded-lg bg-brand-faint px-3 py-2 text-[14px] leading-snug text-ink">
+            <span className="mr-1.5 text-xs font-extrabold tracking-wider text-brand uppercase">
+              {t.appDetails.timeline.teamUpdate}
+            </span>
+            {log.message}
+          </p>
+        )}
       </div>
     </li>
   );

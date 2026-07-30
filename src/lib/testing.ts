@@ -1,3 +1,6 @@
+import { fill } from "@/components/RichText";
+import type { Dict } from "@/lib/i18n/dictionaries";
+
 export const PLAN = {
   name: "Pro Plan",
   badge: "Testers Pro",
@@ -36,12 +39,17 @@ export type AppMessage = {
   created_at: string;
 };
 
+/** A single row from `ct_app_day_logs` — the admin's per-day state + update. */
+export type AppDayLog = {
+  app_id: string;
+  day: number;
+  state: DayState;
+  message: string | null;
+  updated_at: string;
+};
+
 export type AppStatus =
-  | "draft"
-  | "awaiting_setup"
-  | "in_progress"
-  | "completed"
-  | "cancelled";
+  "draft" | "awaiting_setup" | "in_progress" | "completed" | "cancelled";
 
 export type TestingApp = {
   id: string;
@@ -159,6 +167,41 @@ export function buildTimeline(app: {
       isFormAnswersDay: day === total - 1,
     };
   });
+}
+
+/**
+ * The exact sentence a customer sees for one timeline day. Shared so the
+ * admin console can show, next to its own day-state control, precisely what
+ * the customer is looking at — `state` is passed separately from `entry`
+ * because the admin's per-day override can differ from the date-computed
+ * state baked into `entry`.
+ */
+export function dayCopy(
+  entry: TimelineDay,
+  state: DayState,
+  scheduled: boolean,
+  t: Dict,
+): string {
+  const copy = t.appDetails.timeline;
+
+  if (entry.isFormAnswersDay && state !== "completed") {
+    return copy.formAnswersDay;
+  }
+  if (entry.isFinalDay && state !== "completed") {
+    return copy.finalDay;
+  }
+
+  const date = entry.date ? formatDay(entry.date) : null;
+
+  if (state === "completed") {
+    return date ? fill(copy.completedOn, { date }) : copy.completed;
+  }
+  if (state === "current") {
+    return date ? fill(copy.inProgressOn, { date }) : copy.inProgress;
+  }
+  return scheduled && date
+    ? fill(copy.scheduledOn, { date })
+    : copy.notScheduled;
 }
 
 export function progressPercent(app: {

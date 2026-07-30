@@ -109,8 +109,7 @@ const en = {
       title: "Everything the cycle needs, handled",
       body: "One team runs the testing, checks your track against Play policy, and hands you the paperwork at the end.",
       timelineTitle: "Daily activity",
-      note13:
-        "Day 13 — we send the production form answers to your inbox.",
+      note13: "Day 13 — we send the production form answers to your inbox.",
       note14:
         "Day 14 — submit the form, then promote your release to production.",
     },
@@ -323,8 +322,7 @@ const en = {
     doneBody:
       "Our team is checking your track and will start the 14-day cycle shortly.",
     askTitle: "Finished all four steps?",
-    askBody:
-      "Confirm and our team will verify your track, then start day 1.",
+    askBody: "Confirm and our team will verify your track, then start day 1.",
     button: "I've completed setup",
     buttonDone: "Setup confirmed",
     buttonSaving: "Saving…",
@@ -391,10 +389,12 @@ const en = {
       inProgress: "Testing in progress.",
       scheduledOn: "Testing scheduled for {date}.",
       notScheduled: "Scheduled once your cycle starts.",
+      teamUpdate: "Update from our team:",
     },
     promo: {
       cta: "Send promo codes…",
-      submittedNotice: "Promo codes sent — we'll check them and start your cycle.",
+      submittedNotice:
+        "Promo codes sent — we'll check them and start your cycle.",
       modalTitle: "Send your 14 promo codes",
       modalBody:
         "Since your app is **PAID**, generate 14 promo codes in Play Console under Monetize → App pricing → Promo codes, then paste them below — one per line.",
@@ -423,7 +423,8 @@ const en = {
 
   activate: {
     title: "Ready to go live?",
-    subtitle: "**{name}** is saved. Enter your token to start the 14-day testing cycle.",
+    subtitle:
+      "**{name}** is saved. Enter your token to start the 14-day testing cycle.",
     cardTitle: "Enter your token",
     cardBody: "Each token activates one app.",
     tokenLabel: "Token ID",
@@ -501,8 +502,7 @@ const en = {
     subtitle: "Your account and the details you need in Play Console.",
     signedInAs: "Signed in as",
     adminTitle: "Admin console",
-    adminBody:
-      "Submissions, cycles, tokens, packages and site settings.",
+    adminBody: "Submissions, cycles, tokens, packages and site settings.",
     adminLink: "Open the admin console",
     groupTitle: "Tester group",
     groupBody:
@@ -735,7 +735,8 @@ const th: Dictionary = {
         body: "กรอกแค่ 4 ช่องก็เสร็จ ที่เหลือเราจัดการต่อให้",
       },
     ],
-    errorExpired: "ลิงก์เข้าสู่ระบบหมดอายุหรือถูกใช้ไปแล้ว กรุณาลองใหม่อีกครั้ง",
+    errorExpired:
+      "ลิงก์เข้าสู่ระบบหมดอายุหรือถูกใช้ไปแล้ว กรุณาลองใหม่อีกครั้ง",
     errorGeneric: "เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง",
   },
 
@@ -795,7 +796,8 @@ const th: Dictionary = {
       noTokenBody: "เราจะส่งโทเคนของคุณทางอีเมลทันทีหลังชำระเงิน",
       noTokenCta: "ซื้อแพ็กเกจ",
       questions: "มีคำถาม?",
-      tokensAvailableOne: "คุณมีโทเคนที่ยังไม่ใช้ **1** อัน — กรอกให้แล้วด้านล่าง",
+      tokensAvailableOne:
+        "คุณมีโทเคนที่ยังไม่ใช้ **1** อัน — กรอกให้แล้วด้านล่าง",
       tokensAvailableMany:
         "คุณมีโทเคนที่ยังไม่ใช้ **{count}** อัน — กรอกให้ 1 อันด้านล่างแล้ว",
       viewTokens: "ดูโทเคนทั้งหมดของฉัน",
@@ -806,8 +808,7 @@ const th: Dictionary = {
       question: "ยืนยันการตั้งค่า Play Console",
       hint: "ต้องทำขั้นตอนนี้ใน Play Console ให้เสร็จก่อน ถึงจะไปต่อได้",
       doneTitle: "ทำครบแล้ว",
-      doneBody:
-        "เปิดครบทุกประเทศ เพิ่มกลุ่มเทสเตอร์ และส่งให้รีวิวเรียบร้อย",
+      doneBody: "เปิดครบทุกประเทศ เพิ่มกลุ่มเทสเตอร์ และส่งให้รีวิวเรียบร้อย",
     },
     step3: {
       title: "ข้อมูลแอป",
@@ -836,8 +837,7 @@ const th: Dictionary = {
   setupGuide: {
     beforeYouBegin: "ก่อนเริ่มต้น",
     introTitle: "เปิดแดชบอร์ด Play Console ของคุณ",
-    intro1:
-      "เข้าสู่ระบบ **Google Play Console** แล้วเลือกแอปที่ต้องการทดสอบ",
+    intro1: "เข้าสู่ระบบ **Google Play Console** แล้วเลือกแอปที่ต้องการทดสอบ",
     intro2:
       "ไปที่ **Test and release** → **Testing** → **Closed testing** แล้วเปิด track ของคุณ",
     intro3:
@@ -940,6 +940,7 @@ const th: Dictionary = {
       inProgress: "กำลังทดสอบ",
       scheduledOn: "กำหนดทดสอบวันที่ {date}",
       notScheduled: "จะเริ่มนับเมื่อรอบทดสอบเริ่ม",
+      teamUpdate: "อัปเดตจากทีมงาน:",
     },
     promo: {
       cta: "ส่งโปรโมโค้ด…",
@@ -1028,8 +1029,7 @@ const th: Dictionary = {
     successBody:
       "ขอบคุณครับ โทเคนของคุณพร้อมใช้งานแล้ว หนึ่งโทเคนเปิดใช้งานได้หนึ่งแอป",
     tokensTitle: "โทเคนของคุณ",
-    tokensHint:
-      "เก็บรหัสนี้ไว้ให้ดี ดูย้อนหลังได้ตลอดที่หน้า \"ใช้โทเคน\"",
+    tokensHint: 'เก็บรหัสนี้ไว้ให้ดี ดูย้อนหลังได้ตลอดที่หน้า "ใช้โทเคน"',
     useNow: "ใช้โทเคนตอนนี้",
     backToApps: "กลับไปที่แอปของฉัน",
     pending: "เรากำลังยืนยันการชำระเงิน กรุณารีเฟรชอีกครั้งในอีกสักครู่",
