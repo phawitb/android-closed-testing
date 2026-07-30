@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ButtonLink, Container, cn } from "./ui";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SettingsModal } from "./SettingsModal";
 import { TokenBadge } from "./TokenBadge";
 import { AppLogo } from "./AppLogo";
 import { Menu, Settings } from "./icons";
+import { hasWizardDraftInProgress } from "@/lib/wizardDraft";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dict } from "@/lib/i18n/dictionaries";
 
@@ -41,11 +42,26 @@ export function AppHeader({
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // A saved wizard draft past step 1 means there's a submission to resume —
+  // the CTA should read "Continue" instead of restarting from "Add New App".
+  const [resumingWizard, setResumingWizard] = useState(false);
+  // localStorage doesn't exist during SSR, so this can only run post-mount.
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    setResumingWizard(hasWizardDraftInProgress());
+  }, [pathname]);
+  /* eslint-enable react-hooks/set-state-in-effect */
+
   const links = [
     { href: "/dashboard", label: nav.myApps, exact: true },
     { href: "/dashboard/apps/new", label: nav.submitApp },
     { href: "/pricing", label: nav.plans },
   ];
+
+  const effectiveCta =
+    cta && cta.href === "/dashboard/apps/new" && resumingWizard
+      ? { ...cta, label: t.common.continueApp }
+      : cta;
 
   return (
     <>
@@ -110,9 +126,9 @@ export function AppHeader({
               </button>
             </div>
 
-            {cta && (
-              <ButtonLink href={cta.href} variant="primary" size="sm">
-                {cta.label}
+            {effectiveCta && (
+              <ButtonLink href={effectiveCta.href} variant="primary" size="sm">
+                {effectiveCta.label}
               </ButtonLink>
             )}
 

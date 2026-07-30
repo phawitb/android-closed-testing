@@ -34,13 +34,14 @@ import {
   Ticket,
 } from "@/components/icons";
 import { isEmail, normaliseStoreUrl } from "@/lib/testing";
+import { WIZARD_DRAFT_STORAGE_KEY } from "@/lib/wizardDraft";
 import type { SiteSettings } from "@/lib/settings";
 import type { Dict } from "@/lib/i18n/dictionaries";
 import { checkToken, createApp } from "./actions";
 
 const STEP_ICONS = [Ticket, ClipboardList, Phone];
 const TOTAL_STEPS = 3;
-const STORAGE_KEY = "ct-submit-wizard";
+const STORAGE_KEY = WIZARD_DRAFT_STORAGE_KEY;
 
 type AppType = "free" | "paid";
 type SetupChoice = "done" | null;
@@ -59,12 +60,16 @@ type Draft = {
 export function SubmitWizard({
   defaultEmail,
   tokenCode,
+  autoValidateToken = false,
   myTokens,
   settings,
   t,
 }: {
   defaultEmail: string;
   tokenCode: string | null;
+  /** True right after a purchase — the token is already known-good, so skip
+   * straight to step 2 instead of making the customer click Continue. */
+  autoValidateToken?: boolean;
   myTokens: string[];
   settings: SiteSettings;
   t: Dict;
@@ -163,6 +168,15 @@ export function SubmitWizard({
       goTo(step + 1);
     });
   }
+
+  // Fresh back from a purchase: the token this payment just minted is
+  // already known-good, so validate and advance once on mount instead of
+  // waiting for a click.
+  /* eslint-disable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
+  useEffect(() => {
+    if (autoValidateToken && tokenCode) verifyToken();
+  }, []);
+  /* eslint-enable react-hooks/set-state-in-effect, react-hooks/exhaustive-deps */
 
   function finalize() {
     setError(null);

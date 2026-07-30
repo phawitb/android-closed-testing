@@ -3,7 +3,6 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { AppHeader } from "@/components/AppHeader";
 import {
-  ButtonLink,
   Card,
   Container,
   IconBadge,
@@ -11,11 +10,12 @@ import {
   StatusPill,
   cn,
 } from "@/components/ui";
-import { ArrowRight, Bolt, Gauge, Ticket } from "@/components/icons";
+import { Bolt, Gauge, Ticket } from "@/components/icons";
 import { getT } from "@/lib/i18n/server";
 import { appNav } from "@/lib/i18n/nav";
 import type { Dict } from "@/lib/i18n/dictionaries";
 import { currentDay, progressPercent, type TestingApp } from "@/lib/testing";
+import { SubmitAppButton } from "./SubmitAppButton";
 
 export const metadata = { title: "My Apps — Closed Testing" };
 
@@ -70,15 +70,7 @@ export default async function DashboardPage() {
             </p>
           </div>
 
-          <ButtonLink
-            href="/dashboard/apps/new"
-            variant="primary"
-            size="md"
-            className="sm:hidden lg:inline-flex"
-          >
-            {t.common.submitApp}
-            <ArrowRight className="h-4 w-4" />
-          </ButtonLink>
+          <SubmitAppButton t={t} className="sm:hidden lg:inline-flex" />
         </header>
 
         {error && (

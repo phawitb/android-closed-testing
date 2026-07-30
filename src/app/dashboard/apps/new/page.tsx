@@ -13,9 +13,9 @@ export const metadata = { title: "Submit an app — Closed Testing" };
 export default async function NewAppPage({
   searchParams,
 }: {
-  searchParams: Promise<{ code?: string }>;
+  searchParams: Promise<{ code?: string; fromPurchase?: string }>;
 }) {
-  const { code } = await searchParams;
+  const { code, fromPurchase } = await searchParams;
   const { locale, t } = await getT();
 
   const supabase = await createClient();
@@ -47,6 +47,7 @@ export default async function NewAppPage({
       <SubmitWizard
         defaultEmail={user.email ?? ""}
         tokenCode={code ? normaliseTokenCode(code) : null}
+        autoValidateToken={fromPurchase === "1"}
         myTokens={myTokens}
         settings={settings}
         t={t}
