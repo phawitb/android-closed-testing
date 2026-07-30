@@ -32,6 +32,7 @@ const en = {
       how: "How it works",
       rule: "The Play rule",
       included: "What you get",
+      pricing: "Pricing",
       faq: "FAQ",
     },
     badge: "Google Play closed testing",
@@ -112,6 +113,12 @@ const en = {
         "Day 13 — we send the production form answers to your inbox.",
       note14:
         "Day 14 — submit the form, then promote your release to production.",
+    },
+    pricingTeaser: {
+      eyebrow: "Pricing",
+      title: "One token, one app",
+      body: "No subscription — buy a package once, and each token activates one full 14-day cycle.",
+      cta: "See all plans",
     },
     faq: {
       eyebrow: "FAQ",
@@ -579,6 +586,7 @@ const th: Dictionary = {
       how: "ขั้นตอนการใช้งาน",
       rule: "กฎของ Google Play",
       included: "สิ่งที่คุณได้รับ",
+      pricing: "ราคา",
       faq: "คำถามที่พบบ่อย",
     },
     badge: "Google Play closed testing",
@@ -657,6 +665,12 @@ const th: Dictionary = {
       timelineTitle: "กิจกรรมรายวัน",
       note13: "วันที่ 13 — เราส่งคำตอบแบบฟอร์ม production เข้าอีเมลคุณ",
       note14: "วันที่ 14 — ส่งแบบฟอร์ม แล้วเลื่อนรีลีสขึ้น production",
+    },
+    pricingTeaser: {
+      eyebrow: "ราคา",
+      title: "หนึ่งโทเคน หนึ่งแอป",
+      body: "ไม่มีระบบรายเดือน ซื้อแพ็กเกจครั้งเดียว แต่ละโทเคนใช้ได้กับรอบทดสอบ 14 วันเต็มหนึ่งรอบ",
+      cta: "ดูแพ็กเกจทั้งหมด",
     },
     faq: {
       eyebrow: "คำถามที่พบบ่อย",

@@ -11,6 +11,7 @@ export type SiteNavLabels = {
   how: string;
   rule: string;
   included: string;
+  pricing: string;
   faq: string;
   signIn: string;
   getStarted: string;
@@ -34,6 +35,7 @@ export function SiteHeader({
     { href: "#how", label: nav.how },
     { href: "#requirement", label: nav.rule },
     { href: "#included", label: nav.included },
+    { href: "#pricing", label: nav.pricing },
     { href: "#faq", label: nav.faq },
   ];
 

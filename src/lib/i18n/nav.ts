@@ -18,6 +18,7 @@ export function siteNav(t: Dict): SiteNavLabels {
     how: t.landing.nav.how,
     rule: t.landing.nav.rule,
     included: t.landing.nav.included,
+    pricing: t.landing.nav.pricing,
     faq: t.landing.nav.faq,
     signIn: t.common.signIn,
     getStarted: t.common.getStarted,

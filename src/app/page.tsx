@@ -12,6 +12,7 @@ import {
   cn,
 } from "@/components/ui";
 import {
+  ArrowRight,
   Bolt,
   Calendar,
   Check,
@@ -27,6 +28,7 @@ import {
 import { getT } from "@/lib/i18n/server";
 import { siteNav } from "@/lib/i18n/nav";
 import type { Dict } from "@/lib/i18n/dictionaries";
+import { formatPrice } from "@/app/admin/types";
 
 export const metadata = {
   title: "Closed Testing — 14 days of Google Play closed testing",
@@ -37,14 +39,34 @@ export const metadata = {
 const HOW_ICONS = [ClipboardList, Ticket, Gauge];
 const RULE_ICONS = [Users, Calendar, Lock, ClipboardList];
 
+type PublicPackage = {
+  id: string;
+  name: string;
+  description: string | null;
+  token_count: number;
+  price_cents: number;
+  currency: string;
+};
+
 export default async function HomePage() {
   const { locale, t } = await getT();
 
   const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
+  const [
+    {
+      data: { user },
+    },
+    { data: packagesData },
+  ] = await Promise.all([
+    supabase.auth.getUser(),
+    supabase
+      .from("ct_packages")
+      .select("id, name, description, token_count, price_cents, currency")
+      .eq("is_active", true)
+      .order("sort_order"),
+  ]);
 
+  const packages = (packagesData ?? []) as PublicPackage[];
   const signedIn = Boolean(user);
   const startHref = signedIn
     ? "/dashboard/apps/new"
@@ -221,6 +243,88 @@ export default async function HomePage() {
             </div>
 
             <TimelinePreview t={t} />
+          </div>
+        </Container>
+      </section>
+
+      {/* ----------------------------------------------------------- pricing */}
+      <section id="pricing" className="scroll-mt-24 py-16 lg:py-24">
+        <Container width="full">
+          <SectionHeading
+            align="center"
+            eyebrow={t.landing.pricingTeaser.eyebrow}
+            title={t.landing.pricingTeaser.title}
+            body={t.landing.pricingTeaser.body}
+          />
+
+          {packages.length > 0 && (
+            <ul
+              className={cn(
+                "mx-auto mt-10 grid gap-5",
+                packages.length === 1
+                  ? "max-w-sm"
+                  : "max-w-4xl sm:grid-cols-2 lg:grid-cols-3",
+              )}
+            >
+              {packages.map((pkg, index) => (
+                <li key={pkg.id}>
+                  <Card
+                    className={cn(
+                      "lift h-full",
+                      index === 0 &&
+                        packages.length > 1 &&
+                        "border-brand-tint ring-1 ring-brand-tint",
+                    )}
+                  >
+                    <h3 className="text-xl font-extrabold text-ink">
+                      {pkg.name}
+                    </h3>
+                    {pkg.description && (
+                      <p className="mt-1 text-[15px] leading-relaxed text-muted">
+                        {pkg.description}
+                      </p>
+                    )}
+                    <p className="font-display mt-5 text-4xl font-extrabold text-ink">
+                      {formatPrice(pkg.price_cents, pkg.currency)}
+                    </p>
+                    <p className="mt-1 inline-flex items-center gap-1.5 text-sm font-bold text-brand">
+                      <Check className="h-4 w-4" />
+                      {pkg.token_count}{" "}
+                      {pkg.token_count === 1
+                        ? t.pricing.tokensOne
+                        : t.pricing.tokensMany}
+                    </p>
+                  </Card>
+                </li>
+              ))}
+            </ul>
+          )}
+
+          {packages.length > 0 && (
+            <div className="mx-auto mt-8 max-w-3xl rounded-xl border border-line bg-surface p-6 sm:p-8">
+              <p className="text-xs font-extrabold tracking-[0.14em] text-brand uppercase">
+                {t.pricing.everyPackage}
+              </p>
+              <ul className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+                {t.plan.features.map((feature) => (
+                  <li key={feature} className="flex items-start gap-3">
+                    <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-tint text-brand">
+                      <Check className="h-3.5 w-3.5" />
+                    </span>
+                    <span className="text-[15px] leading-snug font-semibold text-ink-soft">
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          <div className="mt-9 flex justify-center">
+            <ButtonLink href="/pricing" variant="primary" size="lg">
+              {t.landing.pricingTeaser.cta}
+              <ArrowRight className="h-5 w-5" />
+            </ButtonLink>
           </div>
         </Container>
       </section>
