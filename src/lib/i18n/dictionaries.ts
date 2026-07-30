@@ -658,7 +658,7 @@ const th: Dictionary = {
     cta: {
       title: "เริ่มนับ 14 วันได้ตั้งแต่วันนี้",
       body: "เข้าสู่ระบบด้วย Google ทำตามคู่มือตั้งค่า แล้วรอบทดสอบของคุณเริ่มได้ภายในสัปดาห์นี้",
-      buttonSignedOut: "ดำเนินการต่อด้วย Google",
+      buttonSignedOut: "เริ่มใช้งาน",
       buttonSignedIn: "ไปที่แอปของฉัน",
     },
   },
