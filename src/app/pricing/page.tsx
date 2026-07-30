@@ -1,14 +1,7 @@
 import { createClient } from "@/lib/supabase/server";
 import { AppHeader } from "@/components/AppHeader";
 import { SiteHeader } from "@/components/SiteHeader";
-import {
-  ButtonLink,
-  Card,
-  Container,
-  Page,
-  SectionHeading,
-  cn,
-} from "@/components/ui";
+import { ButtonLink, Card, Container, Page, cn } from "@/components/ui";
 import { ArrowRight, Check } from "@/components/icons";
 import { getSettings } from "@/lib/settings.server";
 import { isCheckoutEnabled } from "@/lib/stripe";
@@ -64,16 +57,14 @@ export default async function PricingPage() {
       )}
 
       <Container width="xl" className="pt-10 pb-20 lg:pt-14">
-        <SectionHeading
-          align="center"
-          eyebrow={t.pricing.eyebrow}
-          title={t.pricing.title}
-        />
+        <p className="text-center text-xs font-extrabold tracking-[0.16em] text-brand uppercase">
+          {t.pricing.eyebrow}
+        </p>
 
         {packages.length > 0 && (
           <ul
             className={cn(
-              "mt-12 grid gap-5",
+              "mt-6 grid gap-5",
               packages.length === 1
                 ? "mx-auto max-w-sm"
                 : "sm:grid-cols-2 lg:grid-cols-3",

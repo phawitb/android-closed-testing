@@ -418,7 +418,6 @@ const en = {
 
   pricing: {
     eyebrow: "Plans & pricing",
-    title: "One package, one app, fourteen days",
     popular: "Most popular",
     appsOne: "app",
     appsMany: "apps",
@@ -499,8 +498,6 @@ const en = {
       "12+ Real Testers interact with your app daily for 14 days",
       "12 Real Testers Delivered",
       "Daily Active Engagement",
-      "Manual Policy Compliance Check",
-      "Form answers shared after testing",
       "Fully Handled by Our Team",
       "Money Back Guarantee",
     ],
@@ -920,7 +917,6 @@ const th: Dictionary = {
 
   pricing: {
     eyebrow: "แพ็กเกจและราคา",
-    title: "หนึ่งแพ็กเกจ หนึ่งแอป สิบสี่วัน",
     popular: "ยอดนิยม",
     appsOne: "แอป",
     appsMany: "แอป",
@@ -999,8 +995,6 @@ const th: Dictionary = {
       "Tester จริง 12+ คนใช้งานแอปคุณทุกวันตลอด 14 วัน",
       "ส่งมอบ Tester จริง 12 คน",
       "มีการใช้งานจริงทุกวัน",
-      "ตรวจความสอดคล้องกับนโยบายโดยทีมงาน",
-      "ส่งคำตอบแบบฟอร์มให้หลังทดสอบเสร็จ",
       "ทีมงานดูแลให้ทั้งหมด",
       "รับประกันคืนเงิน",
     ],

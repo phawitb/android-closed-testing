@@ -12,8 +12,6 @@ export const PLAN = {
     "12+ Real Testers interact with your app daily for 14 days",
     "12 Real Testers Delivered",
     "Daily Active Engagement",
-    "Manual Policy Compliance Check",
-    "Form answers shared after testing",
     "Fully Handled by Our Team",
     "Money Back Guarantee",
   ],
