@@ -1,4 +1,6 @@
 import { Resend } from "resend";
+import { createAdminClient } from "@/lib/supabase/admin";
+import { siteUrl } from "@/lib/stripe";
 
 /** Mail is optional — without a key these calls just log and skip. */
 export function isEmailConfigured(): boolean {
@@ -26,12 +28,14 @@ async function sendEmail({
   subject,
   html,
 }: {
-  to: string;
+  to: string | string[];
   subject: string;
   html: string;
 }): Promise<void> {
   if (!isEmailConfigured()) {
-    console.log(`[email] skipped (RESEND_API_KEY not set): ${subject} -> ${to}`);
+    console.log(
+      `[email] skipped (RESEND_API_KEY not set): ${subject} -> ${to}`,
+    );
     return;
   }
 
@@ -42,6 +46,36 @@ async function sendEmail({
     // triggered it — payment/submission/completion already happened.
     console.error("sendEmail failed", error);
   }
+}
+
+function escapeHtml(value: string): string {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+/** Every email in ct_admins — the table only service role can read. */
+async function adminRecipients(): Promise<string[]> {
+  try {
+    const supabase = createAdminClient();
+    const { data, error } = await supabase.from("ct_admins").select("email");
+    if (error) throw error;
+    return (data ?? [])
+      .map((row) => (row as { email: string }).email)
+      .filter(Boolean);
+  } catch (error) {
+    console.error("adminRecipients failed", error);
+    return [];
+  }
+}
+
+/** A task just landed in the admin console — mirror it to every admin's inbox. */
+async function notifyAdmins(subject: string, bodyHtml: string): Promise<void> {
+  const to = await adminRecipients();
+  if (to.length === 0) return;
+  await sendEmail({ to, subject, html: wrap(subject, bodyHtml) });
 }
 
 function wrap(title: string, bodyHtml: string): string {
@@ -105,4 +139,30 @@ export async function sendTestingCompleteEmail(
       `,
     ),
   });
+}
+
+/** Customer confirmed their Play Console setup — the cycle is ready to start. */
+export async function sendAdminSetupReadyEmail(appName: string): Promise<void> {
+  await notifyAdmins(
+    `Ready to start — ${appName}`,
+    `
+      <p><strong>${escapeHtml(appName)}</strong> confirmed their Play Console setup and is ready for you to start the cycle.</p>
+      <p><a href="${siteUrl()}/admin/apps">Open submissions</a></p>
+    `,
+  );
+}
+
+/** Customer sent a message on their app thread — it needs an admin reply. */
+export async function sendAdminOwnerMessageEmail(
+  appName: string,
+  message: string,
+): Promise<void> {
+  await notifyAdmins(
+    `New message — ${appName}`,
+    `
+      <p><strong>${escapeHtml(appName)}</strong> sent a message that needs a reply.</p>
+      <p style="white-space: pre-wrap; background: #f4f4f8; border-radius: 8px; padding: 12px;">${escapeHtml(message)}</p>
+      <p><a href="${siteUrl()}/admin/apps">Open submissions</a></p>
+    `,
+  );
 }

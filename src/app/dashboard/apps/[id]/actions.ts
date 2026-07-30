@@ -3,6 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { createClient } from "@/lib/supabase/server";
 import { getT } from "@/lib/i18n/server";
+import {
+  sendAdminOwnerMessageEmail,
+  sendAdminSetupReadyEmail,
+} from "@/lib/email";
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
 
@@ -15,16 +19,20 @@ export async function confirmSetup(appId: string): Promise<ActionResult> {
 
   if (!user) return { ok: false, error: t.tokenErrors.signIn };
 
-  const { error } = await supabase
+  const { data, error } = await supabase
     .from("ct_apps")
     .update({ setup_confirmed_at: new Date().toISOString() })
     .eq("id", appId)
-    .eq("owner_id", user.id);
+    .eq("owner_id", user.id)
+    .select("name")
+    .single();
 
   if (error) {
     console.error("confirmSetup failed", error);
     return { ok: false, error: t.formErrors.save };
   }
+
+  await sendAdminSetupReadyEmail(data.name);
 
   revalidatePath(`/dashboard/apps/${appId}`);
   revalidatePath(`/dashboard/apps/${appId}/setup`);
@@ -126,6 +134,15 @@ export async function reportIssue(
   if (error) {
     console.error("reportIssue failed", error);
     return { ok: false, error: t.formErrors.save };
+  }
+
+  const { data: appRow } = await supabase
+    .from("ct_apps")
+    .select("name")
+    .eq("id", appId)
+    .single();
+  if (appRow) {
+    await sendAdminOwnerMessageEmail(appRow.name, trimmed);
   }
 
   revalidatePath(`/dashboard/apps/${appId}`);
