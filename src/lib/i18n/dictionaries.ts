@@ -89,8 +89,8 @@ const en = {
       cards: [
         {
           title: "Activate your app",
-          body: "Enter the token you received, or buy a package first. One token covers one app, for the whole 14-day cycle.",
-          detail: "Secure checkout, tokens delivered instantly.",
+          body: "Buy a package to get started, or use the code you already have — one covers one app for the whole 14-day cycle.",
+          detail: "Secure checkout, ready to use instantly.",
         },
         {
           title: "Prepare your track",
@@ -115,8 +115,8 @@ const en = {
     },
     pricingTeaser: {
       eyebrow: "Pricing",
-      title: "One token, one app",
-      body: "No subscription — buy a package once, and each token activates one full 14-day cycle.",
+      title: "One package, one app",
+      body: "No subscription — buy a package once, and each one activates one full 14-day cycle.",
       cta: "See all plans",
     },
     faq: {
@@ -240,7 +240,6 @@ const en = {
       valid: "Token accepted — continue to your app details.",
       continue: "Continue with this token",
       noTokenTitle: "No token yet?",
-      noTokenBody: "We send your token by email right after payment.",
       noTokenCta: "Buy a package",
       questions: "Questions?",
       tokensAvailableOne: "You have **1** unused token — filled in below.",
@@ -431,7 +430,6 @@ const en = {
     submit: "Activate with token",
     checking: "Checking…",
     noTokenTitle: "No token yet?",
-    noTokenBody: "We send your token by email right after payment.",
     noTokenCta: "Buy a package",
     questions: "Questions?",
   },
@@ -450,28 +448,13 @@ const en = {
 
   pricing: {
     eyebrow: "Plans & pricing",
-    title: "One token, one app, fourteen days",
-    subtitle:
-      "No subscription. You buy a package, we send the tokens, and you redeem them whenever you are ready.",
+    title: "One package, one app, fourteen days",
     popular: "Most popular",
     appsOne: "app",
     appsMany: "apps",
-    tokensOne: "token",
-    tokensMany: "tokens",
     buy: "Buy now",
     buying: "Opening checkout…",
     signInToBuy: "Sign in to buy",
-    haveToken: "Already have a token?",
-    haveTokenBody: "We send your token by email right after payment.",
-    startSubmission: "Start a submission",
-    howTitle: "How to get a token",
-    how: [
-      "Pick the package that matches how many apps you need to test.",
-      "Pay by card through our secure Stripe checkout.",
-      "Token codes appear straight away and stay in your account.",
-      "Start a submission, paste the token, and we begin your 14-day cycle.",
-    ],
-    codeLooksLike: "Token codes look like",
     everyPackage: "every package includes",
   },
 
@@ -643,8 +626,8 @@ const th: Dictionary = {
       cards: [
         {
           title: "เปิดใช้งานแอป",
-          body: "กรอกโทเคนที่ได้รับ หรือซื้อแพ็กเกจก่อนก็ได้ หนึ่งโทเคนใช้กับหนึ่งแอปตลอดรอบ 14 วัน",
-          detail: "ชำระเงินปลอดภัย รับโทเคนทันที",
+          body: "ซื้อแพ็กเกจเพื่อเริ่มต้น หรือกรอกรหัสที่มีอยู่แล้วก็ได้ หนึ่งรายการใช้ได้กับหนึ่งแอปตลอดรอบ 14 วัน",
+          detail: "ชำระเงินปลอดภัย ใช้งานได้ทันที",
         },
         {
           title: "เตรียม track ของคุณ",
@@ -668,8 +651,8 @@ const th: Dictionary = {
     },
     pricingTeaser: {
       eyebrow: "ราคา",
-      title: "หนึ่งโทเคน หนึ่งแอป",
-      body: "ไม่มีระบบรายเดือน ซื้อแพ็กเกจครั้งเดียว แต่ละโทเคนใช้ได้กับรอบทดสอบ 14 วันเต็มหนึ่งรอบ",
+      title: "หนึ่งแพ็กเกจ หนึ่งแอป",
+      body: "ไม่มีระบบรายเดือน ซื้อแพ็กเกจครั้งเดียว แต่ละรายการใช้ได้กับรอบทดสอบ 14 วันเต็มหนึ่งรอบ",
       cta: "ดูแพ็กเกจทั้งหมด",
     },
     faq: {
@@ -793,7 +776,6 @@ const th: Dictionary = {
       valid: "โทเคนถูกต้อง — ไปกรอกข้อมูลแอปต่อได้เลย",
       continue: "ใช้โทเคนนี้และไปต่อ",
       noTokenTitle: "ยังไม่มีโทเคน?",
-      noTokenBody: "เราจะส่งโทเคนของคุณทางอีเมลทันทีหลังชำระเงิน",
       noTokenCta: "ซื้อแพ็กเกจ",
       questions: "มีคำถาม?",
       tokensAvailableOne:
@@ -980,7 +962,6 @@ const th: Dictionary = {
     submit: "เปิดใช้งานด้วยโทเคน",
     checking: "กำลังตรวจสอบ…",
     noTokenTitle: "ยังไม่มีโทเคน?",
-    noTokenBody: "เราจะส่งโทเคนของคุณทางอีเมลทันทีหลังชำระเงิน",
     noTokenCta: "ซื้อแพ็กเกจ",
     questions: "มีคำถาม?",
   },
@@ -999,28 +980,13 @@ const th: Dictionary = {
 
   pricing: {
     eyebrow: "แพ็กเกจและราคา",
-    title: "หนึ่งโทเคน หนึ่งแอป สิบสี่วัน",
-    subtitle:
-      "ไม่มีระบบรายเดือน ซื้อแพ็กเกจแล้วรับโทเคน จะเอาไปใช้เมื่อไรก็ได้",
+    title: "หนึ่งแพ็กเกจ หนึ่งแอป สิบสี่วัน",
     popular: "ยอดนิยม",
     appsOne: "แอป",
     appsMany: "แอป",
-    tokensOne: "โทเคน",
-    tokensMany: "โทเคน",
     buy: "ซื้อเลย",
     buying: "กำลังเปิดหน้าชำระเงิน…",
     signInToBuy: "เข้าสู่ระบบเพื่อซื้อ",
-    haveToken: "มีโทเคนอยู่แล้ว?",
-    haveTokenBody: "เราจะส่งโทเคนของคุณทางอีเมลทันทีหลังชำระเงิน",
-    startSubmission: "เริ่มส่งแอป",
-    howTitle: "วิธีรับโทเคน",
-    how: [
-      "เลือกแพ็กเกจให้ตรงกับจำนวนแอปที่ต้องการทดสอบ",
-      "ชำระเงินด้วยบัตรผ่านระบบ Stripe ที่ปลอดภัย",
-      "รหัสโทเคนแสดงทันที และเก็บไว้ในบัญชีของคุณตลอด",
-      "เริ่มส่งแอป วางโทเคน แล้วเราเริ่มรอบ 14 วันให้",
-    ],
-    codeLooksLike: "รหัสโทเคนจะมีหน้าตาแบบนี้",
     everyPackage: "ทุกแพ็กเกจได้รับ",
   },
 

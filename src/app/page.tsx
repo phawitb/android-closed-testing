@@ -114,7 +114,11 @@ export default async function HomePage() {
               {[
                 { icon: Users, value: "12+", label: t.landing.stats.testers },
                 { icon: Calendar, value: "14", label: t.landing.stats.days },
-                { icon: ShieldCheck, value: "100%", label: t.landing.stats.policy },
+                {
+                  icon: ShieldCheck,
+                  value: "100%",
+                  label: t.landing.stats.policy,
+                },
               ].map(({ icon: Icon, value, label }) => (
                 <div key={label}>
                   <Icon className="h-5 w-5 text-brand" />
@@ -291,8 +295,8 @@ export default async function HomePage() {
                       <Check className="h-4 w-4" />
                       {pkg.token_count}{" "}
                       {pkg.token_count === 1
-                        ? t.pricing.tokensOne
-                        : t.pricing.tokensMany}
+                        ? t.pricing.appsOne
+                        : t.pricing.appsMany}
                     </p>
                   </Card>
                 </li>
@@ -449,7 +453,9 @@ function HeroPreview({ t }: { t: Dict }) {
               <p className="text-lg leading-tight font-extrabold text-ink">
                 {t.landing.preview.appName}
               </p>
-              <p className="text-sm text-muted">{t.landing.preview.appStatus}</p>
+              <p className="text-sm text-muted">
+                {t.landing.preview.appStatus}
+              </p>
             </div>
           </div>
           <StatusPill label={t.landing.preview.inProgress} />
@@ -527,9 +533,7 @@ function TimelinePreview({ t }: { t: Dict }) {
         <h3 className="text-xl font-extrabold text-ink">
           {t.landing.included.timelineTitle}
         </h3>
-        <span className="text-sm font-bold text-muted">
-          14 {t.common.days}
-        </span>
+        <span className="text-sm font-bold text-muted">14 {t.common.days}</span>
       </div>
 
       <div className="mt-5 grid grid-cols-7 gap-2">

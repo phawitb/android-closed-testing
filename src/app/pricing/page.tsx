@@ -1,7 +1,6 @@
 import { createClient } from "@/lib/supabase/server";
 import { AppHeader } from "@/components/AppHeader";
 import { SiteHeader } from "@/components/SiteHeader";
-import { PlanCard } from "@/components/PlanCard";
 import {
   ButtonLink,
   Card,
@@ -10,7 +9,7 @@ import {
   SectionHeading,
   cn,
 } from "@/components/ui";
-import { ArrowRight, Check, Ticket } from "@/components/icons";
+import { ArrowRight, Check } from "@/components/icons";
 import { getSettings } from "@/lib/settings.server";
 import { isCheckoutEnabled } from "@/lib/stripe";
 import { getT } from "@/lib/i18n/server";
@@ -48,10 +47,6 @@ export default async function PricingPage() {
   ]);
 
   const packages = (data ?? []) as PublicPackage[];
-  const startHref = user
-    ? "/dashboard/apps/new"
-    : "/login?next=%2Fdashboard%2Fapps%2Fnew";
-
   const stripeOn = isCheckoutEnabled(settings.stripePublishableKey);
 
   return (
@@ -73,7 +68,6 @@ export default async function PricingPage() {
           align="center"
           eyebrow={t.pricing.eyebrow}
           title={t.pricing.title}
-          body={t.pricing.subtitle}
         />
 
         {packages.length > 0 && (
@@ -115,11 +109,7 @@ export default async function PricingPage() {
                     {pkg.token_count}{" "}
                     {pkg.token_count === 1
                       ? t.pricing.appsOne
-                      : t.pricing.appsMany}{" "}
-                    · {pkg.token_count}{" "}
-                    {pkg.token_count === 1
-                      ? t.pricing.tokensOne
-                      : t.pricing.tokensMany}
+                      : t.pricing.appsMany}
                   </p>
 
                   <div className="mt-auto pt-7">
@@ -154,69 +144,25 @@ export default async function PricingPage() {
           </ul>
         )}
 
-        <Card className="mt-6 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
-          <div className="flex items-start gap-4">
-            <span className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-brand-tint text-brand">
-              <Ticket className="h-5 w-5" />
-            </span>
-            <div>
-              <h2 className="text-xl font-extrabold text-ink">
-                {t.pricing.haveToken}
-              </h2>
-              <p className="mt-1 text-[15px] text-muted">
-                {t.pricing.haveTokenBody}
-                {settings.supportEmail && (
-                  <>
-                    {" "}
-                    <a
-                      href={`mailto:${settings.supportEmail}`}
-                      className="font-bold text-brand underline underline-offset-4"
-                    >
-                      {settings.supportEmail}
-                    </a>
-                  </>
-                )}
-              </p>
-            </div>
-          </div>
-          <ButtonLink
-            href={startHref}
-            variant="primary"
-            size="md"
-            className="shrink-0"
-          >
-            {t.pricing.startSubmission}
-            <ArrowRight className="h-4 w-4" />
-          </ButtonLink>
-        </Card>
-
-        <div className="mt-14 grid items-start gap-6 lg:grid-cols-2 lg:gap-10">
-          <PlanCard copy={t.plan} showPrice={false} />
-
-          <Card>
-            <h2 className="text-2xl font-extrabold text-ink">
-              {t.pricing.howTitle}
-            </h2>
-            <ol className="mt-5 space-y-4">
-              {t.pricing.how.map((item, index) => (
-                <li key={item} className="flex gap-3">
-                  <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full bg-brand-tint text-sm font-extrabold text-brand">
-                    {index + 1}
+        {packages.length > 0 && (
+          <div className="mx-auto mt-8 max-w-3xl rounded-xl border border-line bg-surface p-6 sm:p-8">
+            <p className="text-xs font-extrabold tracking-[0.14em] text-brand uppercase">
+              {t.pricing.everyPackage}
+            </p>
+            <ul className="mt-4 grid gap-x-6 gap-y-3 sm:grid-cols-2">
+              {t.plan.features.map((feature) => (
+                <li key={feature} className="flex items-start gap-3">
+                  <span className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-full bg-brand-tint text-brand">
+                    <Check className="h-3.5 w-3.5" />
                   </span>
-                  <span className="text-[15px] leading-relaxed text-muted">
-                    {item}
+                  <span className="text-[15px] leading-snug font-semibold text-ink-soft">
+                    {feature}
                   </span>
                 </li>
               ))}
-            </ol>
-            <p className="mt-6 rounded-lg bg-surface-dim px-4 py-3 text-sm text-muted">
-              {t.pricing.codeLooksLike}{" "}
-              <span className="font-mono font-bold text-ink">
-                12TP-XXXX-XXXX
-              </span>
-            </p>
-          </Card>
-        </div>
+            </ul>
+          </div>
+        )}
       </Container>
     </Page>
   );

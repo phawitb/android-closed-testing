@@ -733,9 +733,6 @@ function BuyCard({ settings, t }: { settings: SiteSettings; t: Dict }) {
               {t.wizard.step1.noTokenTitle}
             </h3>
           </div>
-          <p className="mt-2 max-w-md text-[15px] leading-relaxed text-muted">
-            {t.wizard.step1.noTokenBody}
-          </p>
           {settings.supportEmail && (
             <p className="mt-1 text-sm text-muted">
               {t.wizard.step1.questions}{" "}

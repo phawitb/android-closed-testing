@@ -108,9 +108,6 @@ export default async function ActivatePage({
                   {t.activate.noTokenTitle}
                 </h2>
               </div>
-              <p className="mt-2 text-[15px] leading-relaxed text-muted">
-                {t.activate.noTokenBody}
-              </p>
               <div className="mt-4">
                 <ButtonLink href="/pricing" variant="primary" size="md" full>
                   {t.activate.noTokenCta}
