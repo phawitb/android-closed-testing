@@ -176,9 +176,6 @@ const en = {
     loadError:
       "Could not load your apps. If this is the first run, apply the SQL migrations in supabase/migrations to your project.",
     emptyTitle: "No apps yet",
-    emptyBody:
-      "Submitting takes three steps: activate with a token, prepare your Play Console track, then tell us what to test.",
-    emptyCta: "Start a submission",
     testingProgress: "Testing progress",
     subtitleDraft: "Draft — activate this app",
     subtitleSetup: "Complete the Play Console setup",
@@ -210,11 +207,8 @@ const en = {
       title: "Activate your app",
       body: "One token covers one app for the full 14-day cycle.",
       cardTitle: "Enter your token",
-      label: "Token ID",
-      check: "Check my token",
       checking: "Checking…",
       valid: "Token accepted — continue to your app details.",
-      continue: "Continue with this token",
       noTokenTitle: "No token yet?",
       noTokenCta: "Buy a package",
       questions: "Questions?",
@@ -688,9 +682,6 @@ const th: Dictionary = {
     loadError:
       "โหลดรายการแอปไม่สำเร็จ ถ้าเพิ่งติดตั้งครั้งแรก กรุณารันไฟล์ SQL ใน supabase/migrations กับโปรเจกต์ของคุณก่อน",
     emptyTitle: "ยังไม่มีแอป",
-    emptyBody:
-      "การส่งแอปมี 3 ขั้นตอน คือเปิดใช้งานด้วย Token เตรียม track ใน Play Console แล้วบอกเราว่าจะให้ทดสอบแอปไหน",
-    emptyCta: "เริ่มส่งแอป",
     testingProgress: "ความคืบหน้าการทดสอบ",
     subtitleDraft: "ฉบับร่าง — เปิดใช้งานแอปนี้",
     subtitleSetup: "ตั้งค่าใน Play Console ให้เสร็จ",
@@ -722,11 +713,8 @@ const th: Dictionary = {
       title: "เปิดใช้งานแอปของคุณ",
       body: "หนึ่ง Token ใช้กับหนึ่งแอปตลอดรอบ 14 วัน",
       cardTitle: "กรอก Token ของคุณ",
-      label: "รหัส Token",
-      check: "ตรวจสอบ Token",
       checking: "กำลังตรวจสอบ…",
       valid: "Token ถูกต้อง — ไปกรอกข้อมูลแอปต่อได้เลย",
-      continue: "ใช้ Token นี้และไปต่อ",
       noTokenTitle: "ยังไม่มี Token?",
       noTokenCta: "ซื้อแพ็กเกจ",
       questions: "มีคำถาม?",

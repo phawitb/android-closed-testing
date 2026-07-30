@@ -30,7 +30,10 @@ export default async function DashboardPage() {
   if (!user) redirect("/login?next=/dashboard");
 
   const [{ data, error }, { data: isAdmin }] = await Promise.all([
-    supabase.from("ct_apps").select("*").order("created_at", { ascending: false }),
+    supabase
+      .from("ct_apps")
+      .select("*")
+      .order("created_at", { ascending: false }),
     supabase.rpc("ct_is_admin"),
   ]);
 
@@ -94,15 +97,6 @@ export default async function DashboardPage() {
             <h2 className="mt-5 text-2xl font-extrabold text-ink">
               {t.dashboard.emptyTitle}
             </h2>
-            <p className="mx-auto mt-2 max-w-md text-[15px] leading-relaxed text-muted">
-              {t.dashboard.emptyBody}
-            </p>
-            <div className="mt-7 flex justify-center">
-              <ButtonLink href="/dashboard/apps/new" variant="primary" size="lg">
-                {t.dashboard.emptyCta}
-                <ArrowRight className="h-5 w-5" />
-              </ButtonLink>
-            </div>
           </Card>
         )}
 

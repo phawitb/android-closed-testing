@@ -244,7 +244,6 @@ export function SubmitWizard({
 
                 <div className="mt-5 max-w-md">
                   <label className="block">
-                    <FieldLabel>{t.wizard.step1.label}</FieldLabel>
                     <TextField
                       icon={<Ticket className="h-5 w-5" />}
                       value={code}
@@ -292,16 +291,6 @@ export function SubmitWizard({
                   ) : (
                     <ErrorText>{error}</ErrorText>
                   )}
-
-                  <Button
-                    onClick={verifyToken}
-                    disabled={checking || code.trim().length < 6}
-                    variant="secondary"
-                    className="mt-4 py-3.5 text-base"
-                    full
-                  >
-                    {checking ? t.wizard.step1.checking : t.wizard.step1.check}
-                  </Button>
                 </div>
               </Card>
 
@@ -540,10 +529,8 @@ export function SubmitWizard({
                   size="lg"
                   full
                 >
-                  {step === 1
-                    ? checking
-                      ? t.wizard.step1.checking
-                      : t.wizard.step1.continue
+                  {step === 1 && checking
+                    ? t.wizard.step1.checking
                     : t.common.continue}
                   <ArrowRight className="h-5 w-5" />
                 </Button>
