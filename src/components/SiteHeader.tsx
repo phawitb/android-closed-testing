@@ -64,7 +64,9 @@ export function SiteHeader({
         </nav>
 
         <div className="ml-auto flex items-center gap-2 lg:ml-0">
-          <LocaleSwitcher locale={locale} />
+          <div className="hidden lg:block">
+            <LocaleSwitcher locale={locale} />
+          </div>
 
           {signedIn ? (
             <ButtonLink href="/dashboard" variant="dark" size="sm">
@@ -74,7 +76,7 @@ export function SiteHeader({
             <>
               <Link
                 href="/login"
-                className="hidden rounded-full px-4 py-2 text-sm font-bold text-ink transition hover:bg-surface-dim sm:inline-flex"
+                className="hidden rounded-full px-4 py-2 text-sm font-bold text-ink transition hover:bg-surface-dim lg:inline-flex"
               >
                 {nav.signIn}
               </Link>
@@ -99,10 +101,10 @@ export function SiteHeader({
       <div
         className={cn(
           "overflow-hidden border-t border-line transition-[max-height] duration-200 lg:hidden",
-          open ? "max-h-72" : "max-h-0 border-t-0",
+          open ? "max-h-96" : "max-h-0 border-t-0",
         )}
       >
-        <Container width="full" className="flex flex-col py-2">
+        <Container width="full" className="flex flex-col gap-1 py-2">
           {links.map((link) => (
             <a
               key={link.href}
@@ -113,6 +115,20 @@ export function SiteHeader({
               {link.label}
             </a>
           ))}
+
+          {!signedIn && (
+            <Link
+              href="/login"
+              onClick={() => setOpen(false)}
+              className="rounded-lg px-3 py-3 text-[15px] font-bold text-ink-soft transition hover:bg-surface-dim"
+            >
+              {nav.signIn}
+            </Link>
+          )}
+
+          <div className="px-3 py-2">
+            <LocaleSwitcher locale={locale} />
+          </div>
         </Container>
       </div>
     </header>

@@ -158,30 +158,9 @@ const en = {
   },
 
   login: {
-    title: "Welcome back",
-    subtitle:
-      "Sign in to submit an app and follow every day of your 14-day closed testing cycle.",
     cardTitle: "Continue with Google",
-    cardBody:
-      "We only use your Google account to identify you and send testing reports. No password to remember.",
     button: "Continue with Google",
     signingIn: "Redirecting…",
-    newHere: "New here?",
-    seeHow: "See how it works",
-    steps: [
-      {
-        title: "Your token first",
-        body: "One token activates one app for the full 14-day cycle.",
-      },
-      {
-        title: "Then the setup guide",
-        body: "We show you the exact Play Console screens to change, with screenshots.",
-      },
-      {
-        title: "Then your app details",
-        body: "Four fields and you are done — we take it from there.",
-      },
-    ],
     errorExpired:
       "That sign-in link has expired or was already used. Please try again.",
     errorGeneric: "Sign-in did not complete. Please try again.",
@@ -219,14 +198,11 @@ const en = {
   },
 
   wizard: {
-    eyebrow: "New submission",
     title: "Add New App",
-    subtitle:
-      "Three steps: activate with a token, prepare your Play Console track, then tell us what to test.",
     step: "Step",
     stepOf: "of",
     steps: [
-      { title: "Activate", caption: "Enter your token" },
+      { title: "Activate", caption: "Buy a package / enter your token" },
       { title: "Before you begin", caption: "Prepare your Play Console track" },
       { title: "App details", caption: "Tell us what to test" },
     ],
@@ -573,15 +549,15 @@ const th: Dictionary = {
       faq: "คำถามที่พบบ่อย",
     },
     badge: "Google Play closed testing",
-    titleTop: "14 วัน กับเทสเตอร์ตัวจริง",
+    titleTop: "14 วัน กับ Tester ตัวจริง",
     titleAccent: "Android Closed Testing",
     subtitle:
-      "Google Play กำหนดให้ต้องมีเทสเตอร์ 12 คน และทดสอบแบบปิดต่อเนื่อง 14 วัน ก่อนแอปของคุณจะขึ้น production ได้ เราจัดรอบทดสอบให้ด้วยคนจริง และคุณติดตามได้ทุกวันจากแดชบอร์ดเดียว",
-    ctaSignedOut: "เริ่มด้วยบัญชี Google",
+      "Google Play กำหนดให้ต้องมี Tester 12 คน และทดสอบแบบปิดต่อเนื่อง 14 วัน ก่อนแอปของคุณจะขึ้น production ได้ เราจัดรอบทดสอบให้ด้วยคนจริง และคุณติดตามได้ทุกวันจากแดชบอร์ดเดียว",
+    ctaSignedOut: "เริ่มต้นใช้งาน",
     ctaSignedIn: "เพิ่ม App ใหม่",
     ctaSecondary: "ดูขั้นตอนการใช้งาน",
     stats: {
-      testers: "เทสเตอร์ตัวจริง ทุกวัน",
+      testers: "Tester ตัวจริง ทุกวัน",
       days: "วันทดสอบต่อเนื่อง",
       policy: "ตรวจนโยบายด้วยทีมงาน",
     },
@@ -592,7 +568,7 @@ const th: Dictionary = {
       completed: "ทดสอบเสร็จแล้ว",
       current: "กำลังทดสอบ",
       scheduled: "รอถึงคิว",
-      testersToday: "เทสเตอร์วันนี้",
+      testersToday: "Tester วันนี้",
       active: "คน",
     },
     rule: {
@@ -601,16 +577,16 @@ const th: Dictionary = {
       body: "ถ้าบัญชีนักพัฒนาแบบส่วนบุคคลของคุณสมัครหลังวันที่ 13 พฤศจิกายน 2023 Play จะยังไม่เปิดแท็บ production ให้เลย จนกว่ารอบ closed testing จะครบตามกำหนด",
       cards: [
         {
-          title: "เทสเตอร์ 12 คนที่กด opt-in",
+          title: "Tester 12 คนที่กด opt-in",
           body: "ไม่ใช่แค่ยอดติดตั้ง แต่ต้องเป็นคนที่เข้าร่วม track ผ่านลิงก์ opt-in และอยู่ในรอบตลอด",
         },
         {
           title: "ต่อเนื่อง 14 วัน",
-          body: "ถ้า track เงียบไปหรือจำนวนเทสเตอร์หลุดเกณฑ์ ระบบจะเริ่มนับใหม่",
+          body: "ถ้า track เงียบไปหรือจำนวน Tester หลุดเกณฑ์ ระบบจะเริ่มนับใหม่",
         },
         {
           title: "ไม่มีทางลัด",
-          body: "ฟาร์มอีมูเลเตอร์และบัญชีเวียนใช้จะถูกจับได้ เทสเตอร์ของเราคือคนจริงบนเครื่องจริง",
+          body: "ฟาร์มอีมูเลเตอร์และบัญชีเวียนใช้จะถูกจับได้ Tester ของเราคือคนจริงบนเครื่องจริง",
         },
         {
           title: "มีแบบฟอร์มตอนจบ",
@@ -631,12 +607,12 @@ const th: Dictionary = {
         },
         {
           title: "เตรียม track ของคุณ",
-          body: "เราพาไล่ทีละหน้าจอใน Play Console ทั้งเปิด track ให้ครบทุกประเทศ เพิ่มกลุ่มเทสเตอร์ของเรา และส่งการเปลี่ยนแปลงให้ Google รีวิว",
+          body: "เราพาไล่ทีละหน้าจอใน Play Console ทั้งเปิด track ให้ครบทุกประเทศ เพิ่มกลุ่ม Tester ของเรา และส่งการเปลี่ยนแปลงให้ Google รีวิว",
           detail: "มีภาพประกอบทุกขั้นตอน",
         },
         {
           title: "ดู 14 วันเดินไปทีละวัน",
-          body: "เทสเตอร์จริง 12+ คนเปิดใช้แอปคุณทุกวัน แดชบอร์ดบอกชัดว่าตอนนี้วันที่เท่าไร และขั้นต่อไปคืออะไร",
+          body: "Tester จริง 12+ คนเปิดใช้แอปคุณทุกวัน แดชบอร์ดบอกชัดว่าตอนนี้วันที่เท่าไร และขั้นต่อไปคืออะไร",
           detail: "ได้คำตอบแบบฟอร์มก่อนวันสุดท้าย",
         },
       ],
@@ -661,27 +637,27 @@ const th: Dictionary = {
       items: [
         {
           q: "Google Play กำหนดอะไรไว้บ้าง",
-          a: "สำหรับบัญชีนักพัฒนาแบบส่วนบุคคลที่สมัครหลัง 13 พฤศจิกายน 2023 Play กำหนดให้ทำ closed test โดยมีเทสเตอร์ที่กด opt-in อย่างน้อย 12 คน และต้องต่อเนื่องอย่างน้อย 14 วัน ก่อนจะขอสิทธิ์ production ได้",
+          a: "สำหรับบัญชีนักพัฒนาแบบส่วนบุคคลที่สมัครหลัง 13 พฤศจิกายน 2023 Play กำหนดให้ทำ closed test โดยมี Tester ที่กด opt-in อย่างน้อย 12 คน และต้องต่อเนื่องอย่างน้อย 14 วัน ก่อนจะขอสิทธิ์ production ได้",
         },
         {
           q: "ต้องเผยแพร่แอปก่อนไหม",
-          a: "คุณต้องมี track แบบ closed testing ที่มีรีลีสผ่านการรีวิวของ Google แล้ว และมีลิงก์ opt-in ให้เทสเตอร์ใช้ คู่มือตั้งค่าในระบบจะบอกว่าหาทั้งสองอย่างได้ตรงไหน",
+          a: "คุณต้องมี track แบบ closed testing ที่มีรีลีสผ่านการรีวิวของ Google แล้ว และมีลิงก์ opt-in ให้ Tester ใช้ คู่มือตั้งค่าในระบบจะบอกว่าหาทั้งสองอย่างได้ตรงไหน",
         },
         {
           q: "แอปแบบเสียเงินทำได้ไหม",
-          a: "ได้ครับ คุณสร้างโปรโมโค้ด 14 โค้ดใน Play Console ที่ Monetise → App pricing → Promo codes แล้วส่งมาให้เรา เทสเตอร์จะติดตั้งได้โดยไม่ต้องจ่ายเงิน",
+          a: "ได้ครับ คุณสร้างโปรโมโค้ด 14 โค้ดใน Play Console ที่ Monetise → App pricing → Promo codes แล้วส่งมาให้เรา Tester จะติดตั้งได้โดยไม่ต้องจ่ายเงิน",
         },
         {
           q: "หลังครบ 14 วันแล้วยังไงต่อ",
           a: "เราส่งคำตอบสำหรับแบบฟอร์มขอสิทธิ์ production ให้ และอยู่กับคุณจนแอปขึ้นจริง การทดสอบจะนับก็ต่อเมื่อคุณเลื่อนรีลีสขึ้น production แล้ว จึงอย่าเพิ่งหยุด track ก่อน",
         },
         {
-          q: "เทสเตอร์จะรีวิวหรือให้ดาวไหม",
-          a: "ไม่ครับ เทสเตอร์แค่ใช้งานแอปเพื่อให้ครบเงื่อนไข คะแนนและรีวิวใน track แบบปิดไม่แสดงต่อสาธารณะ และเราไม่ยุ่งกับหน้า store listing ของคุณ",
+          q: "Tester จะรีวิวหรือให้ดาวไหม",
+          a: "ไม่ครับ Tester แค่ใช้งานแอปเพื่อให้ครบเงื่อนไข คะแนนและรีวิวใน track แบบปิดไม่แสดงต่อสาธารณะ และเราไม่ยุ่งกับหน้า store listing ของคุณ",
         },
         {
           q: "ต้องให้สิทธิ์เข้า Play Console ไหม",
-          a: "ไม่ต้องเลย คุณแค่เพิ่ม Google Group ของเราเป็นเทสเตอร์ใน track ของคุณเอง นั่นคือสิ่งเดียวที่เราต้องการ",
+          a: "ไม่ต้องเลย คุณแค่เพิ่ม Google Group ของเราเป็น Tester ใน track ของคุณเอง นั่นคือสิ่งเดียวที่เราต้องการ",
         },
       ],
     },
@@ -694,30 +670,9 @@ const th: Dictionary = {
   },
 
   login: {
-    title: "ยินดีต้อนรับกลับ",
-    subtitle:
-      "เข้าสู่ระบบเพื่อส่งแอปเข้าทดสอบ และติดตามรอบ closed testing 14 วันได้ทุกวัน",
     cardTitle: "ดำเนินการต่อด้วย Google",
-    cardBody:
-      "เราใช้บัญชี Google ของคุณเพื่อยืนยันตัวตนและส่งรายงานการทดสอบเท่านั้น ไม่ต้องจำรหัสผ่าน",
     button: "ดำเนินการต่อด้วย Google",
     signingIn: "กำลังพาไปหน้า Google…",
-    newHere: "เพิ่งเข้ามาครั้งแรก?",
-    seeHow: "ดูขั้นตอนการใช้งาน",
-    steps: [
-      {
-        title: "เริ่มด้วยโทเคน",
-        body: "หนึ่งโทเคนเปิดใช้งานหนึ่งแอปตลอดรอบ 14 วัน",
-      },
-      {
-        title: "ตามด้วยคู่มือตั้งค่า",
-        body: "เราชี้ให้เห็นทุกหน้าจอใน Play Console ที่ต้องแก้ พร้อมภาพประกอบ",
-      },
-      {
-        title: "แล้วค่อยกรอกข้อมูลแอป",
-        body: "กรอกแค่ 4 ช่องก็เสร็จ ที่เหลือเราจัดการต่อให้",
-      },
-    ],
     errorExpired:
       "ลิงก์เข้าสู่ระบบหมดอายุหรือถูกใช้ไปแล้ว กรุณาลองใหม่อีกครั้ง",
     errorGeneric: "เข้าสู่ระบบไม่สำเร็จ กรุณาลองใหม่อีกครั้ง",
@@ -734,7 +689,7 @@ const th: Dictionary = {
       "โหลดรายการแอปไม่สำเร็จ ถ้าเพิ่งติดตั้งครั้งแรก กรุณารันไฟล์ SQL ใน supabase/migrations กับโปรเจกต์ของคุณก่อน",
     emptyTitle: "ยังไม่มีแอป",
     emptyBody:
-      "การส่งแอปมี 3 ขั้นตอน คือเปิดใช้งานด้วยโทเคน เตรียม track ใน Play Console แล้วบอกเราว่าจะให้ทดสอบแอปไหน",
+      "การส่งแอปมี 3 ขั้นตอน คือเปิดใช้งานด้วย Token เตรียม track ใน Play Console แล้วบอกเราว่าจะให้ทดสอบแอปไหน",
     emptyCta: "เริ่มส่งแอป",
     testingProgress: "ความคืบหน้าการทดสอบ",
     subtitleDraft: "ฉบับร่าง — เปิดใช้งานแอปนี้",
@@ -742,7 +697,7 @@ const th: Dictionary = {
     subtitleSetupConfirmed: "ยืนยันการตั้งค่าแล้ว — รอทีมงานตรวจสอบ",
     subtitleCancelled: "ยกเลิกแล้ว",
     subtitleRunning: "อยู่ในรอบทดสอบ",
-    actionActivate: "เปิดใช้งานด้วยโทเคน",
+    actionActivate: "เปิดใช้งานด้วย Token",
     actionView: "ดูรายละเอียด",
   },
 
@@ -755,42 +710,39 @@ const th: Dictionary = {
   },
 
   wizard: {
-    eyebrow: "ส่งแอปใหม่",
     title: "เพิ่ม App ใหม่",
-    subtitle:
-      "3 ขั้นตอน คือเปิดใช้งานด้วยโทเคน เตรียม track ใน Play Console แล้วบอกเราว่าจะให้ทดสอบอะไร",
     step: "ขั้นที่",
     stepOf: "จาก",
     steps: [
-      { title: "เปิดใช้งาน", caption: "กรอกโทเคนของคุณ" },
+      { title: "เปิดใช้งาน", caption: "ซื้อแพ็คเก็ต / กรอก Token" },
       { title: "ก่อนเริ่มต้น", caption: "เตรียม track ใน Play Console" },
       { title: "ข้อมูลแอป", caption: "บอกเราว่าจะทดสอบอะไร" },
     ],
     step1: {
       title: "เปิดใช้งานแอปของคุณ",
-      body: "หนึ่งโทเคนใช้กับหนึ่งแอปตลอดรอบ 14 วัน",
-      cardTitle: "กรอกโทเคนของคุณ",
-      label: "รหัสโทเคน",
-      check: "ตรวจสอบโทเคน",
+      body: "หนึ่ง Token ใช้กับหนึ่งแอปตลอดรอบ 14 วัน",
+      cardTitle: "กรอก Token ของคุณ",
+      label: "รหัส Token",
+      check: "ตรวจสอบ Token",
       checking: "กำลังตรวจสอบ…",
-      valid: "โทเคนถูกต้อง — ไปกรอกข้อมูลแอปต่อได้เลย",
-      continue: "ใช้โทเคนนี้และไปต่อ",
-      noTokenTitle: "ยังไม่มีโทเคน?",
+      valid: "Token ถูกต้อง — ไปกรอกข้อมูลแอปต่อได้เลย",
+      continue: "ใช้ Token นี้และไปต่อ",
+      noTokenTitle: "ยังไม่มี Token?",
       noTokenCta: "ซื้อแพ็กเกจ",
       questions: "มีคำถาม?",
       tokensAvailableOne:
-        "คุณมีโทเคนที่ยังไม่ใช้ **1** อัน — กรอกให้แล้วด้านล่าง",
+        "คุณมี Token ที่ยังไม่ใช้ **1** อัน — กรอกให้แล้วด้านล่าง",
       tokensAvailableMany:
-        "คุณมีโทเคนที่ยังไม่ใช้ **{count}** อัน — กรอกให้ 1 อันด้านล่างแล้ว",
-      viewTokens: "ดูโทเคนทั้งหมดของฉัน",
+        "คุณมี Token ที่ยังไม่ใช้ **{count}** อัน — กรอกให้ 1 อันด้านล่างแล้ว",
+      viewTokens: "ดู Token ทั้งหมดของฉัน",
     },
     step2: {
       title: "ก่อนเริ่มต้น",
-      body: "ทำใน Play Console ให้เรียบร้อยก่อน รอบทดสอบจะเริ่มไม่ได้จนกว่า track จะเปิดและเทสเตอร์ของเราเข้าร่วมแล้ว",
+      body: "ทำใน Play Console ให้เรียบร้อยก่อน รอบทดสอบจะเริ่มไม่ได้จนกว่า track จะเปิดและ Tester ของเราเข้าร่วมแล้ว",
       question: "ยืนยันการตั้งค่า Play Console",
       hint: "ต้องทำขั้นตอนนี้ใน Play Console ให้เสร็จก่อน ถึงจะไปต่อได้",
       doneTitle: "ทำครบแล้ว",
-      doneBody: "เปิดครบทุกประเทศ เพิ่มกลุ่มเทสเตอร์ และส่งให้รีวิวเรียบร้อย",
+      doneBody: "เปิดครบทุกประเทศ เพิ่มกลุ่ม Tester และส่งให้รีวิวเรียบร้อย",
     },
     step3: {
       title: "ข้อมูลแอป",
@@ -798,17 +750,17 @@ const th: Dictionary = {
       appName: "ชื่อแอป",
       appNamePlaceholder: "เช่น My Amazing App",
       contactEmail: "อีเมลติดต่อ",
-      optInUrl: "ลิงก์ opt-in สำหรับเทสเตอร์ / ลิงก์ Play Store",
+      optInUrl: "ลิงก์ opt-in สำหรับ Tester / ลิงก์ Play Store",
       optInHintToggle: "หาลิงก์นี้ได้จากไหน",
       optInHint:
         "Play Console → Test and release → Testing → Closed testing → track ของคุณ → **How testers join your test** → คัดลอกลิงก์",
       appType: "ประเภทแอป",
       freeTitle: "แอปฟรี",
-      freeBody: "เทสเตอร์ติดตั้งจากลิงก์ opt-in ได้เลย",
+      freeBody: "Tester ติดตั้งจากลิงก์ opt-in ได้เลย",
       paidTitle: "แอปเสียเงิน",
-      paidBody: "ส่งโปรโมโค้ด 14 โค้ดมาให้เรา เพื่อให้เทสเตอร์ติดตั้งได้",
+      paidBody: "ส่งโปรโมโค้ด 14 โค้ดมาให้เรา เพื่อให้ Tester ติดตั้งได้",
       summary: "สรุปข้อมูล",
-      summaryToken: "โทเคน",
+      summaryToken: "Token",
       summarySetup: "การตั้งค่า Play Console",
       setupDone: "ทำครบแล้ว",
       submit: "ยืนยันการส่งแอป",
@@ -832,7 +784,7 @@ const th: Dictionary = {
         body: "ไปที่แท็บ **Countries/regions** กด **Add countries/regions** เลือก **All countries/regions** แล้วกด Save",
       },
       {
-        title: "เพิ่มกลุ่มเทสเตอร์",
+        title: "เพิ่มกลุ่ม Tester",
         body: "ในแท็บ **Testers** หัวข้อ 'Choose a testing method' ให้เลือก **Google Groups** กด 'Enter email address' แล้วใส่อีเมลกลุ่มด้านล่าง อย่าลืมกด 'Save changes'",
       },
       {
@@ -955,24 +907,24 @@ const th: Dictionary = {
   activate: {
     title: "พร้อมเริ่มหรือยัง?",
     subtitle:
-      "บันทึก **{name}** ไว้แล้ว กรอกโทเคนเพื่อเริ่มรอบทดสอบ 14 วันได้เลย",
-    cardTitle: "กรอกโทเคนของคุณ",
-    cardBody: "หนึ่งโทเคนเปิดใช้งานได้หนึ่งแอป",
-    tokenLabel: "รหัสโทเคน",
-    submit: "เปิดใช้งานด้วยโทเคน",
+      "บันทึก **{name}** ไว้แล้ว กรอก Token เพื่อเริ่มรอบทดสอบ 14 วันได้เลย",
+    cardTitle: "กรอก Token ของคุณ",
+    cardBody: "หนึ่ง Token เปิดใช้งานได้หนึ่งแอป",
+    tokenLabel: "รหัส Token",
+    submit: "เปิดใช้งานด้วย Token",
     checking: "กำลังตรวจสอบ…",
-    noTokenTitle: "ยังไม่มีโทเคน?",
+    noTokenTitle: "ยังไม่มี Token?",
     noTokenCta: "ซื้อแพ็กเกจ",
     questions: "มีคำถาม?",
   },
 
   redeem: {
-    title: "ใช้โทเคน",
-    subtitle: "หนึ่งโทเคนเปิดใช้งานหนึ่งแอปตลอดรอบ 14 วัน",
-    yourToken: "โทเคนของคุณ",
+    title: "ใช้ Token",
+    subtitle: "หนึ่ง Token เปิดใช้งานหนึ่งแอปตลอดรอบ 14 วัน",
+    yourToken: "Token ของคุณ",
     newTitle: "ส่งแอปใหม่",
     newBody:
-      "ระบบจะพาคุณตั้งค่า Play Console รับโทเคน แล้วกรอกข้อมูลแอปทีละขั้น",
+      "ระบบจะพาคุณตั้งค่า Play Console รับ Token แล้วกรอกข้อมูลแอปทีละขั้น",
     newCta: "เริ่มส่งแอป",
     existingTitle: "หรือเปิดใช้งานแอปที่ส่งไว้แล้ว",
     notActivated: "ยังไม่เปิดใช้งาน",
@@ -993,10 +945,10 @@ const th: Dictionary = {
   checkout: {
     successTitle: "ชำระเงินสำเร็จ",
     successBody:
-      "ขอบคุณครับ โทเคนของคุณพร้อมใช้งานแล้ว หนึ่งโทเคนเปิดใช้งานได้หนึ่งแอป",
-    tokensTitle: "โทเคนของคุณ",
-    tokensHint: 'เก็บรหัสนี้ไว้ให้ดี ดูย้อนหลังได้ตลอดที่หน้า "ใช้โทเคน"',
-    useNow: "ใช้โทเคนตอนนี้",
+      "ขอบคุณครับ Token ของคุณพร้อมใช้งานแล้ว หนึ่ง Token เปิดใช้งานได้หนึ่งแอป",
+    tokensTitle: "Token ของคุณ",
+    tokensHint: 'เก็บรหัสนี้ไว้ให้ดี ดูย้อนหลังได้ตลอดที่หน้า "ใช้ Token"',
+    useNow: "ใช้ Token ตอนนี้",
     backToApps: "กลับไปที่แอปของฉัน",
     pending: "เรากำลังยืนยันการชำระเงิน กรุณารีเฟรชอีกครั้งในอีกสักครู่",
     failedTitle: "ยังชำระเงินไม่สำเร็จ",
@@ -1015,27 +967,27 @@ const th: Dictionary = {
     subtitle: "บัญชีของคุณ และข้อมูลที่ต้องใช้ใน Play Console",
     signedInAs: "เข้าสู่ระบบในชื่อ",
     adminTitle: "หน้าผู้ดูแลระบบ",
-    adminBody: "จัดการแอปที่ส่งเข้ามา รอบทดสอบ โทเคน แพ็กเกจ และการตั้งค่าเว็บ",
+    adminBody: "จัดการแอปที่ส่งเข้ามา รอบทดสอบ Token แพ็กเกจ และการตั้งค่าเว็บ",
     adminLink: "เปิดหน้าผู้ดูแลระบบ",
-    groupTitle: "กลุ่มเทสเตอร์",
+    groupTitle: "กลุ่ม Tester",
     groupBody:
       "เพิ่ม Google Group นี้ในแท็บ Testers ของ track แบบ closed testing ของคุณ",
     openGroup: "เปิดกลุ่ม",
     plansTitle: "แพ็กเกจ",
-    plansBody: "ทุกแอปต้องใช้โทเคนของตัวเอง ดูว่าแต่ละแพ็กเกจได้อะไรบ้าง",
+    plansBody: "ทุกแอปต้องใช้ Token ของตัวเอง ดูว่าแต่ละแพ็กเกจได้อะไรบ้าง",
     plansLink: "แพ็กเกจและราคา",
     languageTitle: "ภาษา",
     languageBody: "เลือกภาษาที่ใช้แสดงทั้งเว็บไซต์",
   },
 
   tokenErrors: {
-    invalid: "ไม่พบโทเคนนี้ในระบบ กรุณาตรวจตัวสะกดแล้วลองใหม่",
-    used: "โทเคนนี้ถูกใช้กับแอปอื่นไปแล้ว",
-    void: "โทเคนนี้ถูกยกเลิกแล้ว กรุณาติดต่อเราเพื่อแก้ไข",
-    tooShort: "กรุณากรอกโทเคนที่ได้รับหลังชำระเงิน",
+    invalid: "ไม่พบ Token นี้ในระบบ กรุณาตรวจตัวสะกดแล้วลองใหม่",
+    used: "Token นี้ถูกใช้กับแอปอื่นไปแล้ว",
+    void: "Token นี้ถูกยกเลิกแล้ว กรุณาติดต่อเราเพื่อแก้ไข",
+    tooShort: "กรุณากรอก Token ที่ได้รับหลังชำระเงิน",
     missingSetup:
-      "เซิร์ฟเวอร์ยังไม่ได้ตั้งค่าระบบตรวจโทเคน กรุณารันไฟล์ SQL migration ล่าสุดแล้วลองใหม่",
-    generic: "ตรวจสอบโทเคนไม่สำเร็จ กรุณาลองใหม่",
+      "เซิร์ฟเวอร์ยังไม่ได้ตั้งค่าระบบตรวจ Token กรุณารันไฟล์ SQL migration ล่าสุดแล้วลองใหม่",
+    generic: "ตรวจสอบ Token ไม่สำเร็จ กรุณาลองใหม่",
     signIn: "กรุณาเข้าสู่ระบบอีกครั้ง",
   },
 
@@ -1045,7 +997,7 @@ const th: Dictionary = {
     url: "กรุณากรอกลิงก์ opt-in หรือลิงก์ Play Store ที่ถูกต้อง",
     email: "กรุณากรอกอีเมลติดต่อที่ถูกต้อง",
     save: "บันทึกข้อมูลไม่สำเร็จ กรุณาลองใหม่",
-    tokenFirst: "กรุณากรอกโทเคนก่อน",
+    tokenFirst: "กรุณากรอก Token ก่อน",
   },
 
   copy: {
@@ -1056,8 +1008,8 @@ const th: Dictionary = {
   plan: {
     features: [
       "การันตีได้สิทธิ์ Production",
-      "เทสเตอร์จริง 12+ คนใช้งานแอปคุณทุกวันตลอด 14 วัน",
-      "ส่งมอบเทสเตอร์จริง 12 คน",
+      "Tester จริง 12+ คนใช้งานแอปคุณทุกวันตลอด 14 วัน",
+      "ส่งมอบ Tester จริง 12 คน",
       "มีการใช้งานจริงทุกวัน",
       "ตรวจความสอดคล้องกับนโยบายโดยทีมงาน",
       "ส่งคำตอบแบบฟอร์มให้หลังทดสอบเสร็จ",

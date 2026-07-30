@@ -114,7 +114,9 @@ export function ScreenHeader({
         </Link>
       )}
       <div className="min-w-0 flex-1">
-        <h1 className="text-2xl font-extrabold text-ink sm:text-3xl">{title}</h1>
+        <h1 className="text-2xl font-extrabold text-ink sm:text-3xl">
+          {title}
+        </h1>
         {subtitle && (
           <p className="mt-1 text-[15px] text-muted sm:text-base">{subtitle}</p>
         )}
@@ -187,7 +189,7 @@ type ButtonLook = {
 
 function buttonClass({ variant = "primary", size = "md", full }: ButtonLook) {
   return cn(
-    "inline-flex items-center justify-center gap-2 rounded-full font-bold transition active:scale-[0.99]",
+    "inline-flex items-center justify-center gap-2 rounded-2xl font-bold transition active:scale-[0.99]",
     "disabled:pointer-events-none disabled:bg-none disabled:bg-surface-dim disabled:text-muted disabled:shadow-none",
     VARIANTS[variant],
     SIZES[size],
@@ -260,7 +262,15 @@ export function PrimaryLink({
   className,
   ...props
 }: ComponentProps<typeof Link>) {
-  return <ButtonLink {...props} variant="primary" size="lg" full className={className} />;
+  return (
+    <ButtonLink
+      {...props}
+      variant="primary"
+      size="lg"
+      full
+      className={className}
+    />
+  );
 }
 
 export function SecondaryButton({
@@ -273,7 +283,10 @@ export function SecondaryButton({
       variant="secondary"
       size="md"
       full
-      className={cn("py-3.5 text-base disabled:cursor-not-allowed disabled:opacity-60", className)}
+      className={cn(
+        "py-3.5 text-base disabled:cursor-not-allowed disabled:opacity-60",
+        className,
+      )}
     />
   );
 }
@@ -300,7 +313,7 @@ export function Card({
   return (
     <div
       className={cn(
-        "rounded-xl border p-5 shadow-sm shadow-black/[0.03] sm:p-6",
+        "rounded-lg border p-5 shadow-sm shadow-black/[0.03] sm:p-6",
         !HAS_BG.test(custom) && "bg-surface",
         !HAS_BORDER_COLOUR.test(custom) && "border-line",
         custom,

@@ -206,15 +206,9 @@ export function SubmitWizard({
   return (
     <Container width="xl" className="pt-8 pb-32 lg:pb-16">
       <div className="mb-8 lg:mb-10">
-        <p className="text-xs font-extrabold tracking-[0.16em] text-brand uppercase">
-          {t.wizard.eyebrow}
-        </p>
-        <h1 className="mt-2 text-3xl font-extrabold text-ink sm:text-4xl">
+        <h1 className="text-3xl font-extrabold text-ink sm:text-4xl">
           {t.wizard.title}
         </h1>
-        <p className="mt-2 max-w-2xl text-[17px] text-muted">
-          {t.wizard.subtitle}
-        </p>
       </div>
 
       <div className="lg:hidden">
