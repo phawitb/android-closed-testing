@@ -7,7 +7,10 @@ import { Lock } from "@/components/icons";
 import { AdminShell } from "./AdminShell";
 import { SignOutButton } from "../dashboard/settings/SignOutButton";
 
-export const metadata = { title: "Admin — Closed Testing" };
+export const metadata = {
+  title: "Admin",
+  robots: { index: false, follow: false },
+};
 export const dynamic = "force-dynamic";
 
 export default async function AdminLayout({

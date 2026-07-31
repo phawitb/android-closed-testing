@@ -4,7 +4,7 @@ import { isStripeConfigured } from "@/lib/stripe";
 import { SettingsForm } from "./SettingsForm";
 import { ClearAllDataButton } from "./ClearAllDataButton";
 
-export const metadata = { title: "Settings — Admin" };
+export const metadata = { title: "Settings" };
 
 export default async function AdminSettingsPage() {
   const settings = await getSettings();

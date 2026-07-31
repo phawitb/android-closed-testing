@@ -42,7 +42,7 @@ import { PromoCodesButton } from "./PromoCodesButton";
 import { SetupGuideTrigger } from "./SetupGuideTrigger";
 import { MessageThread } from "./MessageThread";
 
-export const metadata = { title: "App Details — Closed Testing" };
+export const metadata = { title: "App Details" };
 
 export default async function AppDetailsPage({
   params,

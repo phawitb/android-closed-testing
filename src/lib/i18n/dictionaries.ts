@@ -26,6 +26,7 @@ const en = {
     of: "of",
     days: "days",
     menu: "Menu",
+    skipToContent: "Skip to content",
   },
 
   landing: {
@@ -162,42 +163,36 @@ const en = {
       items: [
         {
           name: "Somchai P.",
-          role: "Solo indie developer",
           rating: 5,
           quote:
             "Got my task app through the 12-tester requirement in exactly 14 days. The daily dashboard made it obvious nothing had stalled.",
         },
         {
           name: "Kanjana S.",
-          role: "Freelance app developer",
           rating: 5,
           quote:
             "I'd tried a tester-exchange group before and the count kept dropping below 12. This just ran, day after day, without me babysitting it.",
         },
         {
           name: "Thanawat L.",
-          role: "Startup founder",
           rating: 4,
           quote:
             "The setup guide walked me through every Play Console screen. Only wish support hours matched my timezone better.",
         },
         {
           name: "Ploy N.",
-          role: "Game developer",
           rating: 5,
           quote:
             "Paid app with promo codes worked exactly as described. Testing finished and the form answers arrived a day early.",
         },
         {
           name: "Nattapong K.",
-          role: "Contract developer",
           rating: 5,
           quote:
             "Third app I've launched through this. Packages are simple and support answers fast when Play Console throws an odd error.",
         },
         {
           name: "Sirilak M.",
-          role: "Product manager",
           rating: 4,
           quote:
             "Clear day-by-day tracking took the guesswork out of explaining timelines to my team.",
@@ -585,6 +580,7 @@ const th: Dictionary = {
     of: "จาก",
     days: "วัน",
     menu: "เมนู",
+    skipToContent: "ข้ามไปยังเนื้อหา",
   },
 
   landing: {
@@ -720,42 +716,36 @@ const th: Dictionary = {
       items: [
         {
           name: "Somchai P.",
-          role: "นักพัฒนาอินดี้",
           rating: 5,
           quote:
             "ผ่านเงื่อนไข 12 tester ภายใน 14 วันพอดี แดชบอร์ดรายวันทำให้เห็นชัดว่าไม่มีวันไหนสะดุด",
         },
         {
           name: "Kanjana S.",
-          role: "นักพัฒนาแอปฟรีแลนซ์",
           rating: 5,
           quote:
             "เคยลองกลุ่มแลก tester เองมาก่อน จำนวนคนหลุดต่ำกว่า 12 ตลอด พอมาใช้บริการนี้ระบบวิ่งเองทุกวันไม่ต้องคอยเช็ค",
         },
         {
           name: "Thanawat L.",
-          role: "ผู้ก่อตั้งสตาร์ทอัพ",
           rating: 4,
           quote:
             "คู่มือพาไล่ทีละหน้าจอใน Play Console ครบ อยากให้เวลาซัพพอร์ตตรงกับโซนเวลาของผมมากกว่านี้",
         },
         {
           name: "Ploy N.",
-          role: "นักพัฒนาเกม",
           rating: 5,
           quote:
             "แอปเสียเงินใช้โปรโมโค้ดได้ตามที่บอกจริง ทดสอบเสร็จ คำตอบแบบฟอร์มมาก่อนกำหนดหนึ่งวัน",
         },
         {
           name: "Nattapong K.",
-          role: "นักพัฒนารับจ้าง",
           rating: 5,
           quote:
             "แอปที่สามที่ปล่อยผ่านบริการนี้ แพ็กเกจเข้าใจง่าย ซัพพอร์ตตอบไวเวลา Play Console ขึ้น error แปลกๆ",
         },
         {
           name: "Sirilak M.",
-          role: "โปรดักต์แมเนเจอร์",
           rating: 4,
           quote:
             "ติดตามความคืบหน้ารายวันชัดเจน ไม่ต้องเดาเวลาตอนอธิบายทีมงาน",

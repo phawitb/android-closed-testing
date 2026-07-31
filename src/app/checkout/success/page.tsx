@@ -11,7 +11,10 @@ import { appNav } from "@/lib/i18n/nav";
 import { fill } from "@/components/RichText";
 import { PendingRetry } from "./PendingRetry";
 
-export const metadata = { title: "Payment complete — Closed Testing" };
+export const metadata = {
+  title: "Payment complete",
+  robots: { index: false, follow: false },
+};
 export const dynamic = "force-dynamic";
 
 export default async function CheckoutSuccessPage({

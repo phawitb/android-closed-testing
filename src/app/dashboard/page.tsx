@@ -17,7 +17,7 @@ import type { Dict } from "@/lib/i18n/dictionaries";
 import { currentDay, progressPercent, type TestingApp } from "@/lib/testing";
 import { SubmitAppButton } from "./SubmitAppButton";
 
-export const metadata = { title: "My Apps — Closed Testing" };
+export const metadata = { title: "My Apps" };
 
 export default async function DashboardPage() {
   const { locale, t } = await getT();

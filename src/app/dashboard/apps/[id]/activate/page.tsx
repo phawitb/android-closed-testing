@@ -12,7 +12,7 @@ import { appNav } from "@/lib/i18n/nav";
 import { normaliseTokenCode, type TestingApp } from "@/lib/testing";
 import { RedeemForm } from "./RedeemForm";
 
-export const metadata = { title: "Activate — Closed Testing" };
+export const metadata = { title: "Activate" };
 
 export default async function ActivatePage({
   params,

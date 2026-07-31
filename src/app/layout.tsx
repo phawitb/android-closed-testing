@@ -3,6 +3,7 @@ import { Kanit, Plus_Jakarta_Sans, Quicksand } from "next/font/google";
 import { getT } from "@/lib/i18n/server";
 import { ServiceWorkerRegister } from "@/components/ServiceWorkerRegister";
 import { InstallPrompt } from "@/components/InstallPrompt";
+import { jsonLd } from "@/lib/seo";
 import "./globals.css";
 
 const display = Plus_Jakarta_Sans({
@@ -25,10 +26,38 @@ const thai = Kanit({
   weight: ["400", "500", "600", "700"],
 });
 
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+).replace(/\/$/, "");
+
+const siteDescription =
+  "Submit your Android app for a 14-day Google Play closed testing cycle and track every day of progress.";
+
 export const metadata: Metadata = {
-  title: "Closed Testing",
-  description:
-    "Submit your Android app for a 14-day Google Play closed testing cycle and track every day of progress.",
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: "Closed Testing — 14 days of Google Play closed testing",
+    template: "%s — Closed Testing",
+  },
+  description: siteDescription,
+  applicationName: "Closed Testing",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true },
+  },
+  openGraph: {
+    type: "website",
+    siteName: "Closed Testing",
+    title: "Closed Testing — 14 days of Google Play closed testing",
+    description: siteDescription,
+    url: "/",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Closed Testing — 14 days of Google Play closed testing",
+    description: siteDescription,
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
@@ -42,6 +71,21 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+const organizationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Closed Testing",
+  url: siteUrl,
+  logo: `${siteUrl}/icons/icon-512.png`,
+};
+
+const websiteJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Closed Testing",
+  url: siteUrl,
+};
+
 export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
@@ -52,6 +96,14 @@ export default async function RootLayout({
       <body
         className={`${display.variable} ${body.variable} ${thai.variable} antialiased`}
       >
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(organizationJsonLd)}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={jsonLd(websiteJsonLd)}
+        />
         {children}
         <ServiceWorkerRegister />
         <InstallPrompt

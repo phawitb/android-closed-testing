@@ -8,7 +8,7 @@ import { appNav } from "@/lib/i18n/nav";
 import { normaliseTokenCode, type MyToken } from "@/lib/testing";
 import { SubmitWizard } from "./SubmitWizard";
 
-export const metadata = { title: "Submit an app — Closed Testing" };
+export const metadata = { title: "Submit an app" };
 
 export default async function NewAppPage({
   searchParams,

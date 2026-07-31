@@ -10,7 +10,7 @@ import { appNav } from "@/lib/i18n/nav";
 import type { TestingApp } from "@/lib/testing";
 import { CompleteSetupButton } from "./CompleteSetupButton";
 
-export const metadata = { title: "Setup Guide — Closed Testing" };
+export const metadata = { title: "Setup Guide" };
 
 export default async function SetupGuidePage({
   params,

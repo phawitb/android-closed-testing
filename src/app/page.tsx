@@ -31,12 +31,19 @@ import { getT } from "@/lib/i18n/server";
 import { siteNav } from "@/lib/i18n/nav";
 import type { Dict } from "@/lib/i18n/dictionaries";
 import { formatPrice } from "@/app/admin/types";
+import { jsonLd, pageMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Closed Testing — 14 days of Google Play closed testing",
-  description:
-    "Google Play asks for 12 testers and 14 continuous days of closed testing before production access. We run the cycle with real testers and you follow every day from one dashboard.",
-};
+const homeTitle = "Closed Testing — 14 days of Google Play closed testing";
+const homeDescription =
+  "Google Play asks for 12 testers and 14 continuous days of closed testing before production access. We run the cycle with real testers and you follow every day from one dashboard.";
+
+// No top-level `title` here — it's identical to the root layout's default,
+// so leaving it unset avoids the title template appending the suffix twice.
+export const metadata = pageMetadata({
+  title: homeTitle,
+  description: homeDescription,
+  path: "/",
+});
 
 const HOW_ICONS = [ClipboardList, Ticket, Gauge];
 const RULE_ICONS = [Users, Calendar, Lock, ClipboardList];
@@ -74,10 +81,53 @@ export default async function HomePage() {
     ? "/dashboard/apps/new"
     : "/login?next=%2Fdashboard%2Fapps%2Fnew";
 
+  const faqJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: t.landing.faq.items.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  };
+
+  const serviceJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    serviceType: "Google Play closed testing",
+    name: "Closed Testing",
+    description: metadata.description,
+    provider: { "@type": "Organization", name: "Closed Testing" },
+    ...(packages.length > 0 && {
+      offers: packages.map((pkg) => ({
+        "@type": "Offer",
+        name: pkg.name,
+        ...(pkg.description && { description: pkg.description }),
+        price: (pkg.price_cents / 100).toFixed(2),
+        priceCurrency: pkg.currency.toUpperCase(),
+      })),
+    }),
+  };
+
   return (
     <div className="hero-canvas min-h-screen bg-background">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(faqJsonLd)}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(serviceJsonLd)}
+      />
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-brand focus:px-5 focus:py-2.5 focus:text-sm focus:font-bold focus:text-white"
+      >
+        {t.common.skipToContent}
+      </a>
       <SiteHeader signedIn={signedIn} nav={siteNav(t)} locale={locale} />
 
+      <main id="main-content">
       {/* ------------------------------------------------------------- hero */}
       <Container width="full" className="pt-14 pb-16 lg:pt-24 lg:pb-24">
         <div className="grid items-center gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-16">
@@ -310,14 +360,9 @@ export default async function HomePage() {
                     <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-tint text-sm font-extrabold text-brand">
                       {review.name.charAt(0)}
                     </span>
-                    <div className="min-w-0">
-                      <p className="truncate text-sm font-extrabold text-ink">
-                        {review.name}
-                      </p>
-                      <p className="truncate text-xs text-muted">
-                        {review.role}
-                      </p>
-                    </div>
+                    <p className="truncate text-sm font-extrabold text-ink">
+                      {review.name}
+                    </p>
                   </div>
                 </Card>
               </li>
@@ -464,6 +509,7 @@ export default async function HomePage() {
           </div>
         </div>
       </Container>
+      </main>
 
       {/* ------------------------------------------------------------- footer */}
       <footer className="border-t border-line py-10">

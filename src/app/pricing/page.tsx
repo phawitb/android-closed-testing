@@ -8,9 +8,18 @@ import { isCheckoutEnabled } from "@/lib/stripe";
 import { getT } from "@/lib/i18n/server";
 import { appNav, siteNav } from "@/lib/i18n/nav";
 import { formatPrice } from "@/app/admin/types";
+import { jsonLd, pageMetadata } from "@/lib/seo";
 import { BuyButton } from "./BuyButton";
 
-export const metadata = { title: "Plans & Pricing — Closed Testing" };
+export const metadata = {
+  title: "Plans & Pricing",
+  ...pageMetadata({
+    title: "Plans & Pricing — Closed Testing",
+    description:
+      "Token packages for Google Play closed testing cycles — pick a package, activate an app, and every 14-day cycle runs with real testers.",
+    path: "/pricing",
+  }),
+};
 
 type PublicPackage = {
   id: string;
@@ -42,8 +51,36 @@ export default async function PricingPage() {
   const packages = (data ?? []) as PublicPackage[];
   const stripeOn = isCheckoutEnabled(settings.stripePublishableKey);
 
+  const siteUrl = (
+    process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+  ).replace(/\/$/, "");
+
+  const breadcrumbJsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: siteUrl },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: "Pricing",
+        item: `${siteUrl}/pricing`,
+      },
+    ],
+  };
+
   return (
     <Page>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={jsonLd(breadcrumbJsonLd)}
+      />
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-3 focus:left-3 focus:z-50 focus:rounded-full focus:bg-brand focus:px-5 focus:py-2.5 focus:text-sm focus:font-bold focus:text-white"
+      >
+        {t.common.skipToContent}
+      </a>
       {user ? (
         <AppHeader
           email={user.email}
@@ -56,6 +93,7 @@ export default async function PricingPage() {
         <SiteHeader signedIn={false} nav={siteNav(t)} locale={locale} />
       )}
 
+      <main id="main-content">
       <Container width="xl" className="pt-10 pb-20 lg:pt-14">
         <p className="text-center text-xs font-extrabold tracking-[0.16em] text-brand uppercase">
           {t.pricing.eyebrow}
@@ -155,6 +193,7 @@ export default async function PricingPage() {
           </div>
         )}
       </Container>
+      </main>
     </Page>
   );
 }

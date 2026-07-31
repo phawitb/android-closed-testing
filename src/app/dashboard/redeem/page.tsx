@@ -13,7 +13,7 @@ import {
   type TestingApp,
 } from "@/lib/testing";
 
-export const metadata = { title: "Redeem a token — Closed Testing" };
+export const metadata = { title: "Redeem a token" };
 
 export default async function RedeemPage({
   searchParams,

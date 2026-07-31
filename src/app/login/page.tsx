@@ -4,7 +4,10 @@ import { Card, Container, Page } from "@/components/ui";
 import { getT } from "@/lib/i18n/server";
 import { GoogleButton } from "./GoogleButton";
 
-export const metadata = { title: "Sign in — Closed Testing" };
+export const metadata = {
+  title: "Sign in",
+  robots: { index: false, follow: true },
+};
 
 function safePath(value: string | undefined) {
   if (!value) return "/dashboard";

@@ -6,7 +6,10 @@ import { Warning } from "@/components/icons";
 import { getT } from "@/lib/i18n/server";
 import { appNav, siteNav } from "@/lib/i18n/nav";
 
-export const metadata = { title: "Checkout cancelled — Closed Testing" };
+export const metadata = {
+  title: "Checkout cancelled",
+  robots: { index: false, follow: false },
+};
 
 export default async function CheckoutCancelledPage() {
   const { locale, t } = await getT();
