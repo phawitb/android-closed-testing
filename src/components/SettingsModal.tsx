@@ -2,12 +2,10 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
-import { CopyField } from "./CopyField";
 import { LocaleSwitcher } from "./LocaleSwitcher";
 import { IconBadge, cn } from "./ui";
-import { Gauge, ShieldCheck, Ticket, X } from "./icons";
+import { Gauge, ShieldCheck, X } from "./icons";
 import { SignOutButton } from "@/app/dashboard/settings/SignOutButton";
-import { TESTER_GROUP_EMAIL, TESTER_GROUP_URL } from "@/lib/testing";
 import type { Locale } from "@/lib/i18n/config";
 import type { Dict } from "@/lib/i18n/dictionaries";
 
@@ -89,43 +87,6 @@ export function SettingsModal({
             <div className="mt-4">
               <LocaleSwitcher locale={locale} size="md" />
             </div>
-          </Section>
-
-          <Section>
-            <SectionHeader
-              icon={<ShieldCheck className="h-5 w-5" />}
-              title={t.settings.groupTitle}
-              body={t.settings.groupBody}
-            />
-            <div className="mt-4">
-              <CopyField
-                value={TESTER_GROUP_EMAIL}
-                hint={t.copy.clickToCopy}
-                copiedLabel={t.copy.copied}
-              />
-            </div>
-            <a
-              href={TESTER_GROUP_URL}
-              target="_blank"
-              rel="noreferrer noopener"
-              className="mt-3 inline-block text-sm font-bold text-brand underline underline-offset-4"
-            >
-              {t.settings.openGroup}
-            </a>
-          </Section>
-
-          <Section>
-            <SectionHeader
-              icon={<Ticket className="h-5 w-5" />}
-              title={t.settings.plansTitle}
-              body={t.settings.plansBody}
-            />
-            <Link
-              href="/pricing"
-              className="mt-3 inline-block text-sm font-bold text-brand underline underline-offset-4"
-            >
-              {t.settings.plansLink}
-            </Link>
           </Section>
 
           {isAdmin && (

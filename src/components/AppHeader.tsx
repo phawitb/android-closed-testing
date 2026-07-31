@@ -4,7 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { ButtonLink, Container, cn } from "./ui";
-import { LocaleSwitcher } from "./LocaleSwitcher";
 import { SettingsModal } from "./SettingsModal";
 import { TokenBadge } from "./TokenBadge";
 import { AppLogo } from "./AppLogo";
@@ -101,7 +100,6 @@ export function AppHeader({
           <div className="ml-auto flex shrink-0 items-center gap-2 lg:ml-0">
             <div className="hidden items-center gap-2 lg:flex">
               <TokenBadge t={t} />
-              <LocaleSwitcher locale={locale} />
 
               {isAdmin && (
                 <Link
@@ -185,7 +183,6 @@ export function AppHeader({
 
             <div className="flex items-center gap-3 px-3 py-2">
               <TokenBadge t={t} />
-              <LocaleSwitcher locale={locale} />
             </div>
           </Container>
         </div>

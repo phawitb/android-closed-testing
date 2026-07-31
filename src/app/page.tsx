@@ -23,6 +23,7 @@ import {
   Lock,
   PlayStore,
   ShieldCheck,
+  Star,
   Ticket,
   Users,
 } from "@/components/icons";
@@ -252,6 +253,79 @@ export default async function HomePage() {
         </Container>
       </section>
 
+      {/* -------------------------------------------------------------- reviews */}
+      <section
+        id="reviews"
+        className="scroll-mt-24 border-y border-line bg-surface-sunken py-16 lg:py-24"
+      >
+        <Container width="full">
+          <SectionHeading
+            align="center"
+            eyebrow={t.landing.reviews.eyebrow}
+            title={t.landing.reviews.title}
+            body={t.landing.reviews.body}
+          />
+
+          <div className="mx-auto mt-10 grid max-w-4xl grid-cols-1 gap-6 rounded-2xl border border-line bg-surface p-6 text-center sm:grid-cols-3 sm:gap-4 sm:p-8">
+            <div>
+              <p className="font-display text-5xl font-extrabold text-ink">
+                {t.landing.reviews.average}
+                <span className="text-xl font-bold text-muted">
+                  {" "}
+                  / 5
+                </span>
+              </p>
+              <StarRow rating={5} className="mt-2 justify-center" />
+              <p className="mt-2 text-sm font-semibold text-muted">
+                {t.landing.reviews.countLabel}
+              </p>
+            </div>
+            <div className="border-t border-line pt-6 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-4">
+              <p className="font-display text-5xl font-extrabold text-brand">
+                {t.landing.reviews.appsApproved.value}
+              </p>
+              <p className="mt-2 text-sm font-semibold text-muted">
+                {t.landing.reviews.appsApproved.label}
+              </p>
+            </div>
+            <div className="border-t border-line pt-6 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-4">
+              <p className="font-display text-5xl font-extrabold text-brand">
+                {t.landing.reviews.successRate.value}
+              </p>
+              <p className="mt-2 text-sm font-semibold text-muted">
+                {t.landing.reviews.successRate.label}
+              </p>
+            </div>
+          </div>
+
+          <ul className="mx-auto mt-10 grid max-w-6xl gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {t.landing.reviews.items.map((review) => (
+              <li key={review.name}>
+                <Card className="lift h-full">
+                  <StarRow rating={review.rating} />
+                  <p className="mt-3 text-[15px] leading-relaxed text-ink-soft">
+                    &ldquo;{review.quote}&rdquo;
+                  </p>
+                  <div className="mt-5 flex items-center gap-3 border-t border-line pt-4">
+                    <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-brand-tint text-sm font-extrabold text-brand">
+                      {review.name.charAt(0)}
+                    </span>
+                    <div className="min-w-0">
+                      <p className="truncate text-sm font-extrabold text-ink">
+                        {review.name}
+                      </p>
+                      <p className="truncate text-xs text-muted">
+                        {review.role}
+                      </p>
+                    </div>
+                  </div>
+                </Card>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
       {/* ----------------------------------------------------------- pricing */}
       <section id="pricing" className="scroll-mt-24 py-16 lg:py-24">
         <Container width="full">
@@ -423,6 +497,29 @@ export default async function HomePage() {
           <span>© {new Date().getFullYear()} Closed Testing</span>
         </Container>
       </footer>
+    </div>
+  );
+}
+
+/** Row of five stars, filled up to `rating`. */
+function StarRow({
+  rating,
+  className,
+}: {
+  rating: number;
+  className?: string;
+}) {
+  return (
+    <div className={cn("flex items-center gap-1", className)}>
+      {Array.from({ length: 5 }, (_, index) => (
+        <Star
+          key={index}
+          className={cn(
+            "h-4 w-4",
+            index < rating ? "text-amber-400" : "text-line",
+          )}
+        />
+      ))}
     </div>
   );
 }

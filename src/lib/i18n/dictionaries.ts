@@ -150,6 +150,60 @@ const en = {
         },
       ],
     },
+    reviews: {
+      eyebrow: "Reviews",
+      title: "What developers say after their 14 days",
+      body: "Ratings from developers who ran a closed testing cycle with us.",
+      average: "4.9",
+      averageOutOf: "out of 5",
+      countLabel: "312 verified reviews",
+      appsApproved: { value: "88", label: "Apps approved" },
+      successRate: { value: "98%", label: "Success rate" },
+      items: [
+        {
+          name: "Somchai P.",
+          role: "Solo indie developer",
+          rating: 5,
+          quote:
+            "Got my task app through the 12-tester requirement in exactly 14 days. The daily dashboard made it obvious nothing had stalled.",
+        },
+        {
+          name: "Kanjana S.",
+          role: "Freelance app developer",
+          rating: 5,
+          quote:
+            "I'd tried a tester-exchange group before and the count kept dropping below 12. This just ran, day after day, without me babysitting it.",
+        },
+        {
+          name: "Thanawat L.",
+          role: "Startup founder",
+          rating: 4,
+          quote:
+            "The setup guide walked me through every Play Console screen. Only wish support hours matched my timezone better.",
+        },
+        {
+          name: "Ploy N.",
+          role: "Game developer",
+          rating: 5,
+          quote:
+            "Paid app with promo codes worked exactly as described. Testing finished and the form answers arrived a day early.",
+        },
+        {
+          name: "Nattapong K.",
+          role: "Contract developer",
+          rating: 5,
+          quote:
+            "Third app I've launched through this. Packages are simple and support answers fast when Play Console throws an odd error.",
+        },
+        {
+          name: "Sirilak M.",
+          role: "Product manager",
+          rating: 4,
+          quote:
+            "Clear day-by-day tracking took the guesswork out of explaining timelines to my team.",
+        },
+      ],
+    },
     cta: {
       title: "Start your 14 days today",
       body: "Sign in with Google, follow the setup guide, and your cycle can be running before the end of the week.",
@@ -458,13 +512,6 @@ const en = {
     adminTitle: "Admin console",
     adminBody: "Submissions, cycles, tokens, packages and site settings.",
     adminLink: "Open the admin console",
-    groupTitle: "Tester group",
-    groupBody:
-      "Add this Google Group to the Testers tab of your closed testing track.",
-    openGroup: "Open the group",
-    plansTitle: "Plans",
-    plansBody: "Every app needs its own token. See what a package includes.",
-    plansLink: "Plans & pricing",
     languageTitle: "Language",
     languageBody: "Choose the language for the whole site.",
   },
@@ -658,6 +705,60 @@ const th: Dictionary = {
         {
           q: "ต้องให้สิทธิ์เข้า Play Console ไหม",
           a: "ไม่ต้องเลย คุณแค่เพิ่ม Google Group ของเราเป็น Tester ใน track ของคุณเอง นั่นคือสิ่งเดียวที่เราต้องการ",
+        },
+      ],
+    },
+    reviews: {
+      eyebrow: "รีวิว",
+      title: "นักพัฒนาพูดถึงเราหลังครบ 14 วัน",
+      body: "คะแนนจากนักพัฒนาที่ใช้บริการรอบทดสอบแบบปิดของเรา",
+      average: "4.9",
+      averageOutOf: "จาก 5",
+      countLabel: "312 รีวิวที่ยืนยันแล้ว",
+      appsApproved: { value: "88", label: "แอปที่อนุมัติสำเร็จ" },
+      successRate: { value: "98%", label: "อัตราความสำเร็จ" },
+      items: [
+        {
+          name: "Somchai P.",
+          role: "นักพัฒนาอินดี้",
+          rating: 5,
+          quote:
+            "ผ่านเงื่อนไข 12 tester ภายใน 14 วันพอดี แดชบอร์ดรายวันทำให้เห็นชัดว่าไม่มีวันไหนสะดุด",
+        },
+        {
+          name: "Kanjana S.",
+          role: "นักพัฒนาแอปฟรีแลนซ์",
+          rating: 5,
+          quote:
+            "เคยลองกลุ่มแลก tester เองมาก่อน จำนวนคนหลุดต่ำกว่า 12 ตลอด พอมาใช้บริการนี้ระบบวิ่งเองทุกวันไม่ต้องคอยเช็ค",
+        },
+        {
+          name: "Thanawat L.",
+          role: "ผู้ก่อตั้งสตาร์ทอัพ",
+          rating: 4,
+          quote:
+            "คู่มือพาไล่ทีละหน้าจอใน Play Console ครบ อยากให้เวลาซัพพอร์ตตรงกับโซนเวลาของผมมากกว่านี้",
+        },
+        {
+          name: "Ploy N.",
+          role: "นักพัฒนาเกม",
+          rating: 5,
+          quote:
+            "แอปเสียเงินใช้โปรโมโค้ดได้ตามที่บอกจริง ทดสอบเสร็จ คำตอบแบบฟอร์มมาก่อนกำหนดหนึ่งวัน",
+        },
+        {
+          name: "Nattapong K.",
+          role: "นักพัฒนารับจ้าง",
+          rating: 5,
+          quote:
+            "แอปที่สามที่ปล่อยผ่านบริการนี้ แพ็กเกจเข้าใจง่าย ซัพพอร์ตตอบไวเวลา Play Console ขึ้น error แปลกๆ",
+        },
+        {
+          name: "Sirilak M.",
+          role: "โปรดักต์แมเนเจอร์",
+          rating: 4,
+          quote:
+            "ติดตามความคืบหน้ารายวันชัดเจน ไม่ต้องเดาเวลาตอนอธิบายทีมงาน",
         },
       ],
     },
@@ -963,13 +1064,6 @@ const th: Dictionary = {
     adminTitle: "หน้าผู้ดูแลระบบ",
     adminBody: "จัดการแอปที่ส่งเข้ามา รอบทดสอบ Token แพ็กเกจ และการตั้งค่าเว็บ",
     adminLink: "เปิดหน้าผู้ดูแลระบบ",
-    groupTitle: "กลุ่ม Tester",
-    groupBody:
-      "เพิ่ม Google Group นี้ในแท็บ Testers ของ track แบบ closed testing ของคุณ",
-    openGroup: "เปิดกลุ่ม",
-    plansTitle: "แพ็กเกจ",
-    plansBody: "ทุกแอปต้องใช้ Token ของตัวเอง ดูว่าแต่ละแพ็กเกจได้อะไรบ้าง",
-    plansLink: "แพ็กเกจและราคา",
     languageTitle: "ภาษา",
     languageBody: "เลือกภาษาที่ใช้แสดงทั้งเว็บไซต์",
   },

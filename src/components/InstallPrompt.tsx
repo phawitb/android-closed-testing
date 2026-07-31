@@ -29,7 +29,8 @@ function isStandalone(): boolean {
 /**
  * Mobile-only install nudge. Android/Chrome gets the native install dialog
  * triggered automatically; iOS Safari has no such API, so it gets a small
- * banner pointing at Share → Add to Home Screen instead.
+ * banner pointing at Share → Add to Home Screen instead. Desktop browsers'
+ * own install UI is suppressed — no popup there.
  */
 export function InstallPrompt({
   iosTitle,
@@ -46,16 +47,18 @@ export function InstallPrompt({
   // iOS (which has no beforeinstallprompt, so it needs the custom banner).
   /* eslint-disable react-hooks/set-state-in-effect */
   useEffect(() => {
-    if (!isMobileDevice() || isStandalone()) return;
+    if (isStandalone()) return;
 
+    // Always prevent the browser's own install UI (e.g. desktop Chrome's
+    // address-bar icon/mini-infobar) — we only want to auto-prompt on mobile.
     function onBeforeInstallPrompt(event: Event) {
       event.preventDefault();
-      void (event as BeforeInstallPromptEvent).prompt();
+      if (isMobileDevice()) void (event as BeforeInstallPromptEvent).prompt();
     }
 
     window.addEventListener("beforeinstallprompt", onBeforeInstallPrompt);
 
-    if (isIOS()) setShowIos(true);
+    if (isMobileDevice() && isIOS()) setShowIos(true);
 
     return () => {
       window.removeEventListener("beforeinstallprompt", onBeforeInstallPrompt);

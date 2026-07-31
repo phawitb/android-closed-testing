@@ -257,6 +257,19 @@ export function X({ className }: IconProps) {
   );
 }
 
+export function Star({ className }: IconProps) {
+  return (
+    <svg
+      className={className}
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      aria-hidden="true"
+    >
+      <path d="m12 2.8 2.9 6.3 6.9.7-5.2 4.7 1.5 6.8L12 17.9l-6.1 3.4 1.5-6.8-5.2-4.7 6.9-.7Z" />
+    </svg>
+  );
+}
+
 export function GoogleMark({ className }: IconProps) {
   return (
     <svg className={className} viewBox="0 0 18 18" aria-hidden="true">
