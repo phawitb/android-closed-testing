@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { ButtonLink, Container, cn } from "./ui";
 import { SettingsModal } from "./SettingsModal";
 import { TokenBadge } from "./TokenBadge";
+import { ModeToggle } from "./ModeToggle";
 import { AppLogo } from "./AppLogo";
 import { Menu, Settings } from "./icons";
 import { hasWizardDraftInProgress } from "@/lib/wizardDraft";
@@ -102,12 +103,11 @@ export function AppHeader({
               <TokenBadge t={t} />
 
               {isAdmin && (
-                <Link
-                  href="/admin"
-                  className="rounded-full border border-line px-4 py-2 text-sm font-bold text-ink transition hover:bg-surface-dim"
-                >
-                  {nav.admin}
-                </Link>
+                <ModeToggle
+                  active="user"
+                  userLabel={nav.myApps}
+                  adminLabel={nav.admin}
+                />
               )}
 
               <button
@@ -161,13 +161,14 @@ export function AppHeader({
             ))}
 
             {isAdmin && (
-              <Link
-                href="/admin"
-                onClick={() => setMenuOpen(false)}
-                className="rounded-lg px-3 py-3 text-[15px] font-bold text-ink-soft transition hover:bg-surface-dim"
-              >
-                {nav.admin}
-              </Link>
+              <div className="px-3 py-2">
+                <ModeToggle
+                  active="user"
+                  userLabel={nav.myApps}
+                  adminLabel={nav.admin}
+                  className="w-full [&>a]:flex-1 [&>a]:text-center"
+                />
+              </div>
             )}
 
             <button

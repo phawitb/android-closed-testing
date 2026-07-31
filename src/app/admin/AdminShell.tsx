@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import Link from "next/link";
+import { ModeToggle } from "@/components/ModeToggle";
 import { AdminNav } from "./AdminNav";
 
 export function AdminShell({
@@ -24,12 +24,7 @@ export function AdminShell({
 
           <div className="flex items-center gap-3">
             <span className="hidden text-sm text-muted sm:inline">{email}</span>
-            <Link
-              href="/dashboard"
-              className="rounded-full border border-line bg-white px-4 py-2 text-sm font-bold text-ink transition hover:bg-surface-dim"
-            >
-              Exit
-            </Link>
+            <ModeToggle active="admin" />
           </div>
         </header>
 
