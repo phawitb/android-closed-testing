@@ -58,6 +58,9 @@ export const metadata: Metadata = {
     title: "Closed Testing — 14 days of Google Play closed testing",
     description: siteDescription,
   },
+  verification: {
+    google: "57VtPxFf3ohQKBCnVjeq4rQ_nE7Uy9_E-XKZhMPpeso",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
